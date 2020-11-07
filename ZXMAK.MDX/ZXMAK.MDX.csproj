@@ -10,14 +10,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.DirectX" />
-    <Reference Include="Microsoft.DirectX.Direct3D" />
-    <Reference Include="Microsoft.DirectX.Direct3DX" />
-    <Reference Include="Microsoft.DirectX.DirectInput" />
-    <Reference Include="Microsoft.DirectX.DirectSound" />
-    <Reference Include="Microsoft.VisualC" />
-  </ItemGroup>
-  <ItemGroup>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

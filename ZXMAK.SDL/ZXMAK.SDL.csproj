@@ -10,14 +10,14 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SdlDotNet" />
-    <Reference Include="Tao.Sdl" />
-  </ItemGroup>
-  <ItemGroup>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SDL" Version="1.2.15.16" />
+    <PackageReference Include="SharpDX" Version="4.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZXMAK.Engine\ZXMAK.Engine.csproj" />

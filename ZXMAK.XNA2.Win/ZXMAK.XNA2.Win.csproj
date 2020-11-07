@@ -9,11 +9,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Xna.Framework" />
-    <Reference Include="Microsoft.Xna.Framework.Game" />
+    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <AppDesigner Include="Properties\" />
+    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.0.1641" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZXMAK.Engine\ZXMAK.Engine.csproj" />
