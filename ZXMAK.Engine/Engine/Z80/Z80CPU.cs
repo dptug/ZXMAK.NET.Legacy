@@ -103,11 +103,11 @@ namespace ZXMAK.Engine.Z80
 			{
 				if (this.FX == OPFX.IX)
 				{
-					this.regs.MW = this.regs.IX + (ushort)((sbyte)cmd);
+					this.regs.MW = (ushort)(this.regs.IX + (ushort)((sbyte)cmd));
 				}
 				else
 				{
-					this.regs.MW = this.regs.IY + (ushort)((sbyte)cmd);
+					this.regs.MW = (ushort)(this.regs.IY + (ushort)((sbyte)cmd));
 				}
 				this.Tact += 1UL;
 				cmd = this.ReadMemory(this.regs.PC, true);
@@ -140,7 +140,7 @@ namespace ZXMAK.Engine.Z80
 
 		private void RegenMemory()
 		{
-			this.regs.R = ((this.regs.R + 1 & 127) | (this.regs.R & 128));
+			this.regs.R = (byte)(((this.regs.R + 1 & 127) | (this.regs.R & 128)));
 			this.Tact += 1UL;
 		}
 
@@ -202,11 +202,11 @@ namespace ZXMAK.Engine.Z80
 				else
 				{
 					ushort num = (ushort)this.FreeBUS;
-					num += (this.regs.IR & 65280);
+					num += (ushort)((this.regs.IR & 65280));
 					this.regs.MW = (ushort)this.ReadMemory(num, true);
 					this.Tact += 3UL;
 					Registers registers5 = this.regs;
-					registers5.MW += (ushort)((int)this.ReadMemory(num + 1, true) * 256);
+					registers5.MW += (ushort)((int)this.ReadMemory((ushort)(num + 1), true) * 256);
 					this.Tact += 3UL;
 					this.Tact += 6UL;
 				}
@@ -229,18 +229,18 @@ namespace ZXMAK.Engine.Z80
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) + 1;
+			registers.HL = (ushort)((hl = registers.HL) + 1);
 			byte b = readMemory(hl, false);
 			this.Tact += 4UL;
 			OnWRMEM writeMemory = this.WriteMemory;
 			Registers registers2 = this.regs;
 			ushort de;
-			registers2.DE = (de = registers2.DE) + 1;
+			registers2.DE = (ushort)((de = registers2.DE) + 1);
 			writeMemory(de, b);
 			this.Tact += 4UL;
 			b += this.regs.A;
 			b = (byte)((int)(b & 8) + ((int)b << 4 & 32));
-			this.regs.F = (this.regs.F & 193) + b;
+			this.regs.F = (byte)((this.regs.F & 193) + b);
 			Registers registers3 = this.regs;
 			if ((registers3.BC -= 1) != 0)
 			{
@@ -251,14 +251,14 @@ namespace ZXMAK.Engine.Z80
 
 		private void ED_CPI(byte cmd)
 		{
-			byte b = this.regs.F & 1;
+			byte b = (byte)(this.regs.F & 1);
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) + 1;
+			registers.HL = (ushort)((hl = registers.HL) + 1);
 			byte b2 = readMemory(hl, false);
 			this.Tact += 4UL;
-			this.regs.F = this.cpf8b[(int)this.regs.A * 256 + (int)b2] + b;
+			this.regs.F = (byte)(this.cpf8b[(int)this.regs.A * 256 + (int)b2] + b);
 			this.Tact += 4UL;
 			Registers registers2 = this.regs;
 			if ((registers2.BC -= 1) != 0)
@@ -272,13 +272,13 @@ namespace ZXMAK.Engine.Z80
 
 		private void ED_INI(byte cmd)
 		{
-			this.regs.MW = this.regs.BC + 1;
+			this.regs.MW = (ushort)(this.regs.BC + 1);
 			byte value = this.ReadPort(this.regs.BC);
 			this.Tact += 4UL;
 			OnWRMEM writeMemory = this.WriteMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) + 1;
+			registers.HL = (ushort)((hl = registers.HL) + 1);
 			writeMemory(hl, value);
 			this.Tact += 3UL;
 			this.regs.B = this.ALU_DECR(this.regs.B);
@@ -292,7 +292,7 @@ namespace ZXMAK.Engine.Z80
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) + 1;
+			registers.HL = (ushort)((hl = registers.HL) + 1);
 			byte value = readMemory(hl, false);
 			this.Tact += 3UL;
 			this.WritePort(this.regs.BC, value);
@@ -304,7 +304,7 @@ namespace ZXMAK.Engine.Z80
 				Registers registers3 = this.regs;
 				registers3.F |= 1;
 			}
-			this.regs.MW = this.regs.BC + 1;
+			this.regs.MW = (ushort)(this.regs.BC + 1);
 		}
 
 		private void ED_LDD(byte cmd)
@@ -312,18 +312,18 @@ namespace ZXMAK.Engine.Z80
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) - 1;
+			registers.HL = (ushort)((hl = registers.HL) - 1);
 			byte b = readMemory(hl, false);
 			this.Tact += 3UL;
 			OnWRMEM writeMemory = this.WriteMemory;
 			Registers registers2 = this.regs;
 			ushort de;
-			registers2.DE = (de = registers2.DE) - 1;
+			registers2.DE = (ushort)((de = registers2.DE) - 1);
 			writeMemory(de, b);
 			this.Tact += 3UL;
 			b += this.regs.A;
 			b = (byte)((int)(b & 8) + ((int)b << 4 & 32));
-			this.regs.F = (this.regs.F & 193) + b;
+			this.regs.F = (byte)((this.regs.F & 193) + b);
 			Registers registers3 = this.regs;
 			if ((registers3.BC -= 1) != 0)
 			{
@@ -335,14 +335,14 @@ namespace ZXMAK.Engine.Z80
 
 		private void ED_CPD(byte cmd)
 		{
-			byte b = this.regs.F & 1;
+			byte b = (byte)(this.regs.F & 1);
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) - 1;
+			registers.HL = (ushort)((hl = registers.HL) - 1);
 			byte b2 = readMemory(hl, false);
 			this.Tact += 4UL;
-			this.regs.F = this.cpf8b[(int)this.regs.A * 256 + (int)b2] + b;
+			this.regs.F = (byte)(this.cpf8b[(int)this.regs.A * 256 + (int)b2] + b);
 			Registers registers2 = this.regs;
 			if ((registers2.BC -= 1) != 0)
 			{
@@ -356,13 +356,13 @@ namespace ZXMAK.Engine.Z80
 
 		private void ED_IND(byte cmd)
 		{
-			this.regs.MW = this.regs.BC - 1;
+			this.regs.MW = (ushort)(this.regs.BC - 1);
 			byte value = this.ReadPort(this.regs.BC);
 			this.Tact += 4UL;
 			OnWRMEM writeMemory = this.WriteMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) - 1;
+			registers.HL = (ushort)((hl = registers.HL) - 1);
 			writeMemory(hl, value);
 			this.Tact += 3UL;
 			this.regs.B = this.ALU_DECR(this.regs.B);
@@ -376,7 +376,7 @@ namespace ZXMAK.Engine.Z80
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) - 1;
+			registers.HL = (ushort)((hl = registers.HL) - 1);
 			byte value = readMemory(hl, false);
 			this.Tact += 3UL;
 			this.WritePort(this.regs.BC, value);
@@ -388,7 +388,7 @@ namespace ZXMAK.Engine.Z80
 				Registers registers3 = this.regs;
 				registers3.F |= 1;
 			}
-			this.regs.MW = this.regs.BC - 1;
+			this.regs.MW = (ushort)(this.regs.BC - 1);
 		}
 
 		private void ED_LDIR(byte cmd)
@@ -396,18 +396,18 @@ namespace ZXMAK.Engine.Z80
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) + 1;
+			registers.HL = (ushort)((hl = registers.HL) + 1);
 			byte b = readMemory(hl, false);
 			this.Tact += 3UL;
 			OnWRMEM writeMemory = this.WriteMemory;
 			Registers registers2 = this.regs;
 			ushort de;
-			registers2.DE = (de = registers2.DE) + 1;
+			registers2.DE = (ushort)((de = registers2.DE) + 1);
 			writeMemory(de, b);
 			this.Tact += 3UL;
 			b += this.regs.A;
 			b = (byte)((int)(b & 8) + ((int)b << 4 & 32));
-			this.regs.F = (this.regs.F & 193) + b;
+			this.regs.F = (byte)((this.regs.F & 193) + b);
 			this.Tact += 2UL;
 			Registers registers3 = this.regs;
 			if ((registers3.BC -= 1) != 0)
@@ -417,7 +417,7 @@ namespace ZXMAK.Engine.Z80
 				Registers registers5 = this.regs;
 				registers5.PC -= 2;
 				this.Tact += 5UL;
-				this.regs.MW = this.regs.PC + 1;
+				this.regs.MW = (ushort)(this.regs.PC + 1);
 			}
 		}
 
@@ -425,14 +425,14 @@ namespace ZXMAK.Engine.Z80
 		{
 			Registers registers = this.regs;
 			registers.MW += 1;
-			byte b = this.regs.F & 1;
+			byte b = (byte)(this.regs.F & 1);
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers2 = this.regs;
 			ushort hl;
-			registers2.HL = (hl = registers2.HL) + 1;
+			registers2.HL = (ushort)((hl = registers2.HL) + 1);
 			byte b2 = readMemory(hl, false);
 			this.Tact += 3UL;
-			this.regs.F = this.cpf8b[(int)this.regs.A * 256 + (int)b2] + b;
+			this.regs.F = (byte)(this.cpf8b[(int)this.regs.A * 256 + (int)b2] + b);
 			this.Tact += 5UL;
 			Registers registers3 = this.regs;
 			if ((registers3.BC -= 1) != 0)
@@ -444,20 +444,20 @@ namespace ZXMAK.Engine.Z80
 					Registers registers5 = this.regs;
 					registers5.PC -= 2;
 					this.Tact += 5UL;
-					this.regs.MW = this.regs.PC + 1;
+					this.regs.MW = (ushort)(this.regs.PC + 1);
 				}
 			}
 		}
 
 		private void ED_INIR(byte cmd)
 		{
-			this.regs.MW = this.regs.BC + 1;
+			this.regs.MW = (ushort)(this.regs.BC + 1);
 			byte value = this.ReadPort(this.regs.BC);
 			this.Tact += 4UL;
 			OnWRMEM writeMemory = this.WriteMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) + 1;
+			registers.HL = (ushort)((hl = registers.HL) + 1);
 			writeMemory(hl, value);
 			this.Tact += 4UL;
 			this.regs.B = this.ALU_DECR(this.regs.B);
@@ -480,7 +480,7 @@ namespace ZXMAK.Engine.Z80
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) + 1;
+			registers.HL = (ushort)((hl = registers.HL) + 1);
 			byte value = readMemory(hl, false);
 			this.Tact += 4UL;
 			this.WritePort(this.regs.BC, value);
@@ -505,7 +505,7 @@ namespace ZXMAK.Engine.Z80
 				Registers registers6 = this.regs;
 				registers6.F |= 1;
 			}
-			this.regs.MW = this.regs.BC + 1;
+			this.regs.MW = (ushort)(this.regs.BC + 1);
 		}
 
 		private void ED_LDDR(byte cmd)
@@ -513,18 +513,18 @@ namespace ZXMAK.Engine.Z80
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) - 1;
+			registers.HL = (ushort)((hl = registers.HL) - 1);
 			byte b = readMemory(hl, false);
 			this.Tact += 4UL;
 			OnWRMEM writeMemory = this.WriteMemory;
 			Registers registers2 = this.regs;
 			ushort de;
-			registers2.DE = (de = registers2.DE) - 1;
+			registers2.DE = (ushort)((de = registers2.DE) - 1);
 			writeMemory(de, b);
 			this.Tact += 4UL;
 			b += this.regs.A;
 			b = (byte)((int)(b & 8) + ((int)b << 4 & 32));
-			this.regs.F = (this.regs.F & 193) + b;
+			this.regs.F = (byte)((this.regs.F & 193) + b);
 			Registers registers3 = this.regs;
 			if ((registers3.BC -= 1) != 0)
 			{
@@ -540,14 +540,14 @@ namespace ZXMAK.Engine.Z80
 		{
 			Registers registers = this.regs;
 			registers.MW -= 1;
-			byte b = this.regs.F & 1;
+			byte b = (byte)(this.regs.F & 1);
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers2 = this.regs;
 			ushort hl;
-			registers2.HL = (hl = registers2.HL) - 1;
+			registers2.HL = (ushort)((hl = registers2.HL) - 1);
 			byte b2 = readMemory(hl, false);
 			this.Tact += 4UL;
-			this.regs.F = this.cpf8b[(int)this.regs.A * 256 + (int)b2] + b;
+			this.regs.F = (byte)(this.cpf8b[(int)this.regs.A * 256 + (int)b2] + b);
 			this.Tact += 4UL;
 			Registers registers3 = this.regs;
 			if ((registers3.BC -= 1) != 0)
@@ -559,20 +559,20 @@ namespace ZXMAK.Engine.Z80
 					Registers registers5 = this.regs;
 					registers5.PC -= 2;
 					this.Tact += 5UL;
-					this.regs.MW = this.regs.PC + 1;
+					this.regs.MW = (ushort)(this.regs.PC + 1);
 				}
 			}
 		}
 
 		private void ED_INDR(byte cmd)
 		{
-			this.regs.MW = this.regs.BC - 1;
+			this.regs.MW = (ushort)(this.regs.BC - 1);
 			byte value = this.ReadPort(this.regs.BC);
 			this.Tact += 4UL;
 			OnWRMEM writeMemory = this.WriteMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) - 1;
+			registers.HL = (ushort)((hl = registers.HL) - 1);
 			writeMemory(hl, value);
 			this.Tact += 4UL;
 			this.regs.B = this.ALU_DECR(this.regs.B);
@@ -595,7 +595,7 @@ namespace ZXMAK.Engine.Z80
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
 			ushort hl;
-			registers.HL = (hl = registers.HL) - 1;
+			registers.HL = (ushort)((hl = registers.HL) - 1);
 			byte value = readMemory(hl, false);
 			this.Tact += 4UL;
 			this.WritePort(this.regs.BC, value);
@@ -620,12 +620,12 @@ namespace ZXMAK.Engine.Z80
 				Registers registers6 = this.regs;
 				registers6.F |= 1;
 			}
-			this.regs.MW = this.regs.BC - 1;
+			this.regs.MW = (ushort)(this.regs.BC - 1);
 		}
 
 		private void ED_INRC(byte cmd)
 		{
-			this.regs.MW = this.regs.BC + 1;
+			this.regs.MW = (ushort)(this.regs.BC + 1);
 			byte b = this.ReadPort(this.regs.BC);
 			this.Tact += 4UL;
 			int num = (cmd & 56) >> 3;
@@ -633,12 +633,12 @@ namespace ZXMAK.Engine.Z80
 			{
 				this.regs[num] = b;
 			}
-			this.regs.F = (this.log_f[(int)b] | (this.regs.F & 1));
+			this.regs.F = (byte)((this.log_f[(int)b] | (this.regs.F & 1)));
 		}
 
 		private void ED_OUTCR(byte cmd)
 		{
-			this.regs.MW = this.regs.BC + 1;
+			this.regs.MW = (ushort)(this.regs.BC + 1);
 			int num = (cmd & 56) >> 3;
 			this.Tact += 3UL;
 			if (num != 6)
@@ -654,7 +654,7 @@ namespace ZXMAK.Engine.Z80
 
 		private void ED_ADCHLRR(byte cmd)
 		{
-			this.regs.MW = this.regs.HL + 1;
+			this.regs.MW = (ushort)(this.regs.HL + 1);
 			int rr = (cmd & 48) >> 4;
 			byte b = (byte)((this.regs.HL & 4095) + (this.regs.GetPair(rr) & 4095) + (ushort)(this.regs.F & 1) >> 8 & 16);
 			uint num = (uint)((this.regs.HL & ushort.MaxValue) + (this.regs.GetPair(rr) & ushort.MaxValue) + (ushort)(this.regs.F & 1));
@@ -672,13 +672,13 @@ namespace ZXMAK.Engine.Z80
 				b |= 4;
 			}
 			this.regs.HL = (ushort)num;
-			this.regs.F = (b | (this.regs.H & 168));
+			this.regs.F = (byte)((b | (this.regs.H & 168)));
 			this.Tact += 7UL;
 		}
 
 		private void ED_SBCHLRR(byte cmd)
 		{
-			this.regs.MW = this.regs.HL + 1;
+			this.regs.MW = (ushort)(this.regs.HL + 1);
 			int rr = (cmd & 48) >> 4;
 			byte b = 2;
 			b |= (byte)((this.regs.HL & 4095) - (this.regs.GetPair(rr) & 4095) - (ushort)(this.regs.F & 1) >> 8 & 16);
@@ -697,7 +697,7 @@ namespace ZXMAK.Engine.Z80
 				b |= 4;
 			}
 			this.regs.HL = (ushort)num;
-			this.regs.F = (b | (this.regs.H & 168));
+			this.regs.F = (byte)((b | (this.regs.H & 168)));
 			this.Tact += 7UL;
 		}
 
@@ -711,7 +711,7 @@ namespace ZXMAK.Engine.Z80
 			this.Tact += 3UL;
 			Registers registers2 = this.regs;
 			registers2.PC += 1;
-			this.regs.MW = num + 1;
+			this.regs.MW = (ushort)(num + 1);
 			ushort num2 = (ushort)this.ReadMemory(num, false);
 			this.Tact += 3UL;
 			num2 += (ushort)((int)this.ReadMemory(this.regs.MW, false) * 256);
@@ -729,7 +729,7 @@ namespace ZXMAK.Engine.Z80
 			this.Tact += 3UL;
 			Registers registers2 = this.regs;
 			registers2.PC += 1;
-			this.regs.MW = num + 1;
+			this.regs.MW = (ushort)(num + 1);
 			ushort pair = this.regs.GetPair((cmd & 48) >> 4);
 			this.WriteMemory(num, (byte)(pair & 255));
 			this.Tact += 3UL;
@@ -745,7 +745,7 @@ namespace ZXMAK.Engine.Z80
 			ushort num2 = num;
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
-			num = num2 + (ushort)((int)readMemory(registers.SP += 1, false) * 256);
+			num = (ushort)(num2 + (ushort)((int)readMemory(registers.SP += 1, false) * 256));
 			this.Tact += 3UL;
 			Registers registers2 = this.regs;
 			registers2.SP += 1;
@@ -809,30 +809,30 @@ namespace ZXMAK.Engine.Z80
 		{
 			byte b = this.ReadMemory(this.regs.HL, false);
 			this.Tact += 3UL;
-			this.regs.MW = this.regs.HL + 1;
+			this.regs.MW = (ushort)(this.regs.HL + 1);
 			this.WriteMemory(this.regs.HL, (byte)((int)this.regs.A << 4 | b >> 4));
 			this.Tact += 3UL;
 			this.Tact += 4UL;
-			this.regs.A = ((this.regs.A & 240) | (b & 15));
-			this.regs.F = (this.log_f[(int)this.regs.A] | (this.regs.F & 1));
+			this.regs.A = (byte)(((this.regs.A & 240) | (b & 15)));
+			this.regs.F = (byte)((this.log_f[(int)this.regs.A] | (this.regs.F & 1)));
 		}
 
 		private void ED_RLD(byte cmd)
 		{
 			byte b = this.ReadMemory(this.regs.HL, false);
 			this.Tact += 3UL;
-			this.regs.MW = this.regs.HL + 1;
+			this.regs.MW = (ushort)(this.regs.HL + 1);
 			this.WriteMemory(this.regs.HL, (byte)((int)(this.regs.A & 15) | (int)b << 4));
 			this.Tact += 3UL;
 			this.Tact += 4UL;
 			this.regs.A = (byte)((int)(this.regs.A & 240) | b >> 4);
-			this.regs.F = (this.log_f[(int)this.regs.A] | (this.regs.F & 1));
+			this.regs.F = (byte)((this.log_f[(int)this.regs.A] | (this.regs.F & 1)));
 		}
 
 		private void ED_NEG(byte cmd)
 		{
 			this.regs.F = this.sbcf[(int)this.regs.A];
-			this.regs.A = -this.regs.A;
+			this.regs.A = (byte)(-this.regs.A);
 		}
 
 		private void initExecED()
@@ -925,7 +925,7 @@ namespace ZXMAK.Engine.Z80
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
 			ushort pc;
-			registers.PC = (pc = registers.PC) + 1;
+			registers.PC = (ushort)((pc = registers.PC) + 1);
 			ushort num = (ushort)readMemory(pc, false);
 			this.Tact += 5UL;
 			num += (ushort)(this.regs.A << 8);
@@ -939,7 +939,7 @@ namespace ZXMAK.Engine.Z80
 			OnRDMEM readMemory = this.ReadMemory;
 			Registers registers = this.regs;
 			ushort pc;
-			registers.PC = (pc = registers.PC) + 1;
+			registers.PC = (ushort)((pc = registers.PC) + 1);
 			ushort num = (ushort)readMemory(pc, false);
 			this.regs.MW = (ushort)((int)(num + 1 & 255) + ((int)this.regs.A << 8));
 			this.Tact += 4UL;
@@ -1008,7 +1008,7 @@ namespace ZXMAK.Engine.Z80
 
 		private void RLCA(byte cmd)
 		{
-			this.regs.F = (this.rlcaf[(int)this.regs.A] | (this.regs.F & 196));
+			this.regs.F = (byte)((this.rlcaf[(int)this.regs.A] | (this.regs.F & 196)));
 			int num = (int)this.regs.A;
 			num <<= 1;
 			if ((num & 256) != 0)
@@ -1020,7 +1020,7 @@ namespace ZXMAK.Engine.Z80
 
 		private void RRCA(byte cmd)
 		{
-			this.regs.F = (this.rrcaf[(int)this.regs.A] | (this.regs.F & 196));
+			this.regs.F = (byte)((this.rrcaf[(int)this.regs.A] | (this.regs.F & 196)));
 			int num = (int)this.regs.A;
 			if ((num & 1) != 0)
 			{
@@ -1036,7 +1036,7 @@ namespace ZXMAK.Engine.Z80
 		private void RLA(byte cmd)
 		{
 			bool flag = (this.regs.F & 1) != 0;
-			this.regs.F = (this.rlcaf[(int)this.regs.A] | (this.regs.F & 196));
+			this.regs.F = (byte)((this.rlcaf[(int)this.regs.A] | (this.regs.F & 196)));
 			this.regs.A = (byte)((int)this.regs.A << 1 & 255);
 			if (flag)
 			{
@@ -1048,7 +1048,7 @@ namespace ZXMAK.Engine.Z80
 		private void RRA(byte cmd)
 		{
 			bool flag = (this.regs.F & 1) != 0;
-			this.regs.F = (this.rrcaf[(int)this.regs.A] | (this.regs.F & 196));
+			this.regs.F = (byte)((this.rrcaf[(int)this.regs.A] | (this.regs.F & 196)));
 			this.regs.A = (byte)(this.regs.A >> 1);
 			if (flag)
 			{
@@ -1066,12 +1066,12 @@ namespace ZXMAK.Engine.Z80
 		{
 			Registers registers = this.regs;
 			registers.A ^= byte.MaxValue;
-			this.regs.F = ((this.regs.F & 215) | 18 | (this.regs.A & 40));
+			this.regs.F = (byte)(((this.regs.F & 215) | 18 | (this.regs.A & 40)));
 		}
 
 		private void SCF(byte cmd)
 		{
-			this.regs.F = ((this.regs.F & 237) | (this.regs.A & 40) | 1);
+			this.regs.F = (byte)(((this.regs.F & 237) | (this.regs.A & 40) | 1));
 		}
 
 		private void CCF(byte cmd)
@@ -1088,7 +1088,7 @@ namespace ZXMAK.Engine.Z80
 			Registers registers2 = this.regs;
 			if ((registers2.B -= 1) != 0)
 			{
-				this.regs.MW = (this.regs.PC = this.regs.PC + (ushort)((sbyte)num));
+				this.regs.MW = (this.regs.PC = (ushort)(this.regs.PC + (ushort)((sbyte)num)));
 				this.Tact += 5UL;
 			}
 		}
@@ -1148,7 +1148,7 @@ namespace ZXMAK.Engine.Z80
 			this.Tact += 3UL;
 			Registers registers = this.regs;
 			registers.PC += 1;
-			this.regs.MW = (this.regs.PC = this.regs.PC + (ushort)((sbyte)num));
+			this.regs.MW = (this.regs.PC = (ushort)(this.regs.PC + (ushort)((sbyte)num)));
 			this.Tact += 5UL;
 		}
 
@@ -1167,7 +1167,7 @@ namespace ZXMAK.Engine.Z80
 			}
 			if (num4 == 0)
 			{
-				this.regs.MW = (this.regs.PC = this.regs.PC + (ushort)((sbyte)num2));
+				this.regs.MW = (this.regs.PC = (ushort)(this.regs.PC + (ushort)((sbyte)num2)));
 				this.Tact += 5UL;
 			}
 		}
@@ -1338,7 +1338,7 @@ namespace ZXMAK.Engine.Z80
 
 		private void ADDHLRR(byte cmd)
 		{
-			this.regs.MW = this.regs.HL + 1;
+			this.regs.MW = (ushort)(this.regs.HL + 1);
 			this.regs.HL = this.ALU_ADDHLRR(this.regs.HL, this.regs.GetPair((cmd & 48) >> 4));
 			this.Tact += 7UL;
 		}
@@ -1346,7 +1346,7 @@ namespace ZXMAK.Engine.Z80
 		private void LDA_RR_(byte cmd)
 		{
 			ushort pair = this.regs.GetPair((cmd & 48) >> 4);
-			this.regs.MW = pair + 1;
+			this.regs.MW = (ushort)(pair + 1);
 			this.regs.A = this.ReadMemory(pair, false);
 			this.Tact += 3UL;
 		}
@@ -1361,7 +1361,7 @@ namespace ZXMAK.Engine.Z80
 			this.Tact += 3UL;
 			Registers registers2 = this.regs;
 			registers2.PC += 1;
-			this.regs.MW = num + 1;
+			this.regs.MW = (ushort)(num + 1);
 			this.regs.A = this.ReadMemory(num, false);
 			this.Tact += 3UL;
 		}
@@ -1376,7 +1376,7 @@ namespace ZXMAK.Engine.Z80
 			this.Tact += 3UL;
 			Registers registers2 = this.regs;
 			registers2.PC += 1;
-			this.regs.MW = num + 1;
+			this.regs.MW = (ushort)(num + 1);
 			ushort num2 = (ushort)this.ReadMemory(num, false);
 			this.Tact += 3UL;
 			num2 += (ushort)((int)this.ReadMemory(this.regs.MW, false) * 256);
@@ -1417,7 +1417,7 @@ namespace ZXMAK.Engine.Z80
 			this.Tact += 3UL;
 			Registers registers2 = this.regs;
 			registers2.PC += 1;
-			this.regs.MW = num + 1;
+			this.regs.MW = (ushort)(num + 1);
 			this.WriteMemory(num, this.regs.L);
 			this.Tact += 3UL;
 			this.WriteMemory(this.regs.MW, this.regs.H);
@@ -1481,14 +1481,14 @@ namespace ZXMAK.Engine.Z80
 		private void DECRR(byte cmd)
 		{
 			int rr = (cmd & 48) >> 4;
-			this.regs.SetPair(rr, this.regs.GetPair(rr) - 1);
+			this.regs.SetPair(rr, (ushort)(this.regs.GetPair(rr) - 1));
 			this.Tact += 2UL;
 		}
 
 		private void INCRR(byte cmd)
 		{
 			int rr = (cmd & 48) >> 4;
-			this.regs.SetPair(rr, this.regs.GetPair(rr) + 1);
+			this.regs.SetPair(rr, (ushort)(this.regs.GetPair(rr) + 1));
 			this.Tact += 2UL;
 		}
 
@@ -1938,7 +1938,7 @@ namespace ZXMAK.Engine.Z80
 
 		private void FX_ADDIXRR(byte cmd)
 		{
-			this.regs.MW = this.regs.IX + 1;
+			this.regs.MW = (ushort)(this.regs.IX + 1);
 			ushort rde;
 			switch ((cmd & 48) >> 4)
 			{
@@ -2015,7 +2015,7 @@ namespace ZXMAK.Engine.Z80
 			this.Tact += 3UL;
 			Registers registers2 = this.regs;
 			registers2.PC += 1;
-			this.regs.MW = num + 1;
+			this.regs.MW = (ushort)(num + 1);
 			ushort num2 = (ushort)this.ReadMemory(num, false);
 			this.Tact += 3UL;
 			num2 += (ushort)((int)this.ReadMemory(this.regs.MW, false) * 256);
@@ -2047,7 +2047,7 @@ namespace ZXMAK.Engine.Z80
 			this.Tact += 3UL;
 			Registers registers2 = this.regs;
 			registers2.PC += 1;
-			this.regs.MW = num2 + 1;
+			this.regs.MW = (ushort)(num2 + 1);
 			this.WriteMemory(num2, (byte)num);
 			this.Tact += 3UL;
 			this.WriteMemory(this.regs.MW, (byte)(num >> 8));
@@ -2637,14 +2637,14 @@ namespace ZXMAK.Engine.Z80
 		{
 			Registers registers;
 			int index;
-			(registers = this.regs)[index = (int)(cmd & 7)] = (registers[index] & (byte)(~(byte)(1 << ((cmd & 56) >> 3))));
+			(registers = this.regs)[index = (int)(cmd & 7)] = (byte)((registers[index] & (byte)(~(byte)(1 << ((cmd & 56) >> 3)))));
 		}
 
 		private void CB_SET(byte cmd)
 		{
 			Registers registers;
 			int index;
-			(registers = this.regs)[index = (int)(cmd & 7)] = (registers[index] | (byte)(1 << ((cmd & 56) >> 3)));
+			(registers = this.regs)[index = (int)(cmd & 7)] = (byte)(registers[index] | (byte)(1 << ((cmd & 56) >> 3)));
 		}
 
 		private void CB_RLCHL(byte cmd)
@@ -3747,10 +3747,10 @@ namespace ZXMAK.Engine.Z80
 
 		private void ALU_ADCR(byte src)
 		{
-			byte b = this.regs.F & 1;
+			byte b = (byte)(this.regs.F & 1);
 			this.regs.F = this.adcf[(int)this.regs.A + (int)src * 256 + 65536 * (int)b];
 			Registers registers = this.regs;
-			registers.A += src + b;
+			registers.A += (byte)(src + b);
 		}
 
 		private void ALU_SUBR(byte src)
@@ -3762,17 +3762,17 @@ namespace ZXMAK.Engine.Z80
 
 		private void ALU_SBCR(byte src)
 		{
-			byte b = this.regs.F & 1;
+			byte b = (byte)(this.regs.F & 1);
 			this.regs.F = this.sbcf[(int)this.regs.A * 256 + (int)src + 65536 * (int)b];
 			Registers registers = this.regs;
-			registers.A -= src + b;
+			registers.A -= (byte)(src + b);
 		}
 
 		private void ALU_ANDR(byte src)
 		{
 			Registers registers = this.regs;
 			registers.A &= src;
-			this.regs.F = (this.log_f[(int)this.regs.A] | 16);
+			this.regs.F = (byte)((this.log_f[(int)this.regs.A] | 16));
 		}
 
 		private void ALU_XORR(byte src)
@@ -3796,14 +3796,14 @@ namespace ZXMAK.Engine.Z80
 
 		private byte ALU_INCR(byte x)
 		{
-			this.regs.F = (Z80CPU.incf[(int)x] | (this.regs.F & 1));
+			this.regs.F = (byte)((Z80CPU.incf[(int)x] | (this.regs.F & 1)));
 			x += 1;
 			return x;
 		}
 
 		private byte ALU_DECR(byte x)
 		{
-			this.regs.F = (Z80CPU.decf[(int)x] | (this.regs.F & 1));
+			this.regs.F = (byte)((Z80CPU.decf[(int)x] | (this.regs.F & 1)));
 			x -= 1;
 			return x;
 		}
@@ -3820,7 +3820,7 @@ namespace ZXMAK.Engine.Z80
 				registers2.F |= 1;
 			}
 			Registers registers3 = this.regs;
-			registers3.F |= ((byte)(num >> 8 & 255U) & 40);
+			registers3.F |= (byte)(((byte)(num >> 8 & 255U) & 40));
 			return (ushort)(num & 65535U);
 		}
 
@@ -3912,13 +3912,13 @@ namespace ZXMAK.Engine.Z80
 
 		private void ALU_BIT(byte src, int bit)
 		{
-			this.regs.F = (this.log_f[(int)src & 1 << bit] | 16 | (this.regs.F & 1) | (src & 40));
+			this.regs.F = (byte)((this.log_f[(int)src & 1 << bit] | 16 | (this.regs.F & 1) | (src & 40)));
 		}
 
 		private void ALU_BITMEM(byte src, int bit)
 		{
-			this.regs.F = (this.log_f[(int)src & 1 << bit] | 16 | (this.regs.F & 1));
-			this.regs.F = ((this.regs.F & 215) | (this.regs.MH & 40));
+			this.regs.F = (byte)((this.log_f[(int)src & 1 << bit] | 16 | (this.regs.F & 1)));
+			this.regs.F = (byte)(((this.regs.F & 215) | (this.regs.MH & 40)));
 		}
 
 		private void ALU_INIT()
@@ -3965,7 +3965,7 @@ namespace ZXMAK.Engine.Z80
 						b2 ^= 4;
 					}
 				}
-				this.log_f[i] = (b | b2);
+				this.log_f[i] = (byte)((b | b2));
 			}
 			byte[] array = this.log_f;
 			int num2 = 0;
@@ -4056,11 +4056,11 @@ namespace ZXMAK.Engine.Z80
 			this.rrcaf = new byte[256];
 			for (int i = 0; i < 256; i++)
 			{
-				this.rlcaf[i] = (Z80CPU.rlcf[i] & 59);
+				this.rlcaf[i] = (byte)((Z80CPU.rlcf[i] & 59));
 			}
 			for (int j = 0; j < 256; j++)
 			{
-				this.rrcaf[j] = (Z80CPU.rrcf[j] & 59);
+				this.rrcaf[j] = (byte)((Z80CPU.rrcf[j] & 59));
 			}
 		}
 

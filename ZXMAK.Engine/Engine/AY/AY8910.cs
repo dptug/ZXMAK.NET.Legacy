@@ -77,19 +77,19 @@ namespace ZXMAK.Engine.AY
 				switch (this._curReg)
 				{
 				case 0:
-					this.FreqA = ((this.FreqA & 65280) | (ushort)value);
+					this.FreqA = (ushort)(((this.FreqA & 65280) | (ushort)value));
 					return;
 				case 1:
 					this.FreqA = (ushort)((int)(this.FreqA & 255) | (int)value << 8);
 					return;
 				case 2:
-					this.FreqB = ((this.FreqB & 65280) | (ushort)value);
+					this.FreqB = (ushort)(((this.FreqB & 65280) | (ushort)value));
 					return;
 				case 3:
 					this.FreqB = (ushort)((int)(this.FreqB & 255) | (int)value << 8);
 					return;
 				case 4:
-					this.FreqC = ((this.FreqC & 65280) | (ushort)value);
+					this.FreqC = (ushort)(((this.FreqC & 65280) | (ushort)value));
 					return;
 				case 5:
 					this.FreqC = (ushort)((int)(this.FreqC & 255) | (int)value << 8);
@@ -110,7 +110,7 @@ namespace ZXMAK.Engine.AY
 					this.VolumeC = value;
 					return;
 				case 11:
-					this.FreqBend = ((this.FreqBend & 65280) | (ushort)value);
+					this.FreqBend = (ushort)(((this.FreqBend & 65280) | (ushort)value));
 					return;
 				case 12:
 					this.FreqBend = (ushort)((int)(this.FreqBend & 255) | (int)value << 8);
@@ -223,7 +223,7 @@ namespace ZXMAK.Engine.AY
 				while (this.samplePos < toEndPtr)
 				{
 					this.OutputNoiseABC &= (byte)((this.ControlChannels & 56) >> 3 ^ 7);
-					this.MixLineABC = ((this.OutputABC & ((this.ControlChannels & 7) ^ 7)) ^ this.OutputNoiseABC);
+					this.MixLineABC = ((byte)((this.OutputABC & ((this.ControlChannels & 7) ^ 7)) ^ this.OutputNoiseABC));
 					byte b;
 					if ((this.MixLineABC & 1) == 0)
 					{

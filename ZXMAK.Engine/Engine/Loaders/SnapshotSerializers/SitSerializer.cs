@@ -88,7 +88,7 @@ namespace ZXMAK.Engine.Loaders.SnapshotSerializers
 			this._spec.CPU.regs._DE = FormatSerializer.getUInt16(array, 20);
 			this._spec.CPU.regs._HL = FormatSerializer.getUInt16(array, 22);
 			this._spec.CPU.regs._AF = FormatSerializer.getUInt16(array, 24);
-			this._spec.CPU.IM = (array[26] & 2);
+			this._spec.CPU.IM = (byte)((array[26] & 2));
 			if (this._spec.CPU.IM == 0)
 			{
 				this._spec.CPU.IM = 1;

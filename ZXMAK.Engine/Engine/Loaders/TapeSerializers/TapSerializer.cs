@@ -114,7 +114,7 @@ namespace ZXMAK.Engine.Loaders.TapeSerializers
 			{
 				for (int j = 0; j < 10; j++)
 				{
-					array[j] = ((block[indexOffset + j + 2] < 32 || block[indexOffset + j + 2] >= 128) ? 63 : block[indexOffset + j + 2]);
+					array[j] = ((byte)((block[indexOffset + j + 2] < 32 || block[indexOffset + j + 2] >= 128) ? 63 : block[indexOffset + j + 2]));
 				}
 				string @string = Encoding.ASCII.GetString(array, 0, 10);
 				string text = (block[indexOffset + 1] != 0) ? "Bytes" : "Program";

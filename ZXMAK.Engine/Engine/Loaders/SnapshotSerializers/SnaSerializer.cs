@@ -97,7 +97,7 @@ namespace ZXMAK.Engine.Loaders.SnapshotSerializers
 			registers.AF = (ushort)((int)array[21] + 256 * (int)array[22]);
 			registers.SP = (ushort)((int)array[23] + 256 * (int)array[24]);
 			this._spec.CPU.regs = registers;
-			this._spec.CPU.IM = (array[25] & 3);
+			this._spec.CPU.IM = (byte)((array[25] & 3));
 			if (this._spec.CPU.IM > 2)
 			{
 				this._spec.CPU.IM = 2;
@@ -110,7 +110,7 @@ namespace ZXMAK.Engine.Loaders.SnapshotSerializers
 				((ISpectrum)this._spec).PortFE = array[26];
 			}
 			ushort num = (ushort)this._spec.ReadMemory(this._spec.CPU.regs.SP);
-			num |= (ushort)(this._spec.ReadMemory(this._spec.CPU.regs.SP + 1) << 8);
+			num |= (ushort)(this._spec.ReadMemory((ushort)(this._spec.CPU.regs.SP + 1)) << 8);
 			if (stream.Length > 49179L)
 			{
 				num = (ushort)stream.ReadByte();
@@ -146,7 +146,7 @@ namespace ZXMAK.Engine.Loaders.SnapshotSerializers
 		private void saveToStream(Stream stream)
 		{
 			byte[] array = new byte[27];
-			ushort num = this._spec.CPU.regs.SP - 2;
+			ushort num = (ushort)(this._spec.CPU.regs.SP - 2);
 			array[0] = this._spec.CPU.regs.I;
 			array[1] = (byte)(this._spec.CPU.regs._HL & 255);
 			array[2] = (byte)(this._spec.CPU.regs._HL >> 8);
@@ -171,8 +171,8 @@ namespace ZXMAK.Engine.Loaders.SnapshotSerializers
 			array[22] = (byte)(this._spec.CPU.regs.AF >> 8);
 			array[23] = (byte)(num & 255);
 			array[24] = (byte)(num >> 8);
-			array[25] = (this._spec.CPU.IM & 3);
-			array[19] = (this._spec.CPU.IFF2 ? 4 : 0);
+			array[25] = (byte)((this._spec.CPU.IM & 3));
+			array[19] = (byte)((this._spec.CPU.IFF2 ? 4 : 0));
 			if (this._spec is ISpectrum)
 			{
 				array[26] = ((ISpectrum)this._spec).PortFE;
@@ -192,12 +192,12 @@ namespace ZXMAK.Engine.Loaders.SnapshotSerializers
 				byte value = this._spec.ReadMemory(num);
 				Spectrum spec = this._spec;
 				ushort num2 = num;
-				num = num2 + 1;
+				num = (ushort)(num2 + 1);
 				spec.WriteMemory(num2, (byte)(this._spec.CPU.regs.PC & 255));
 				byte value2 = this._spec.ReadMemory(num);
 				Spectrum spec2 = this._spec;
 				ushort num3 = num;
-				num = num3 + 1;
+				num = (ushort)(num3 + 1);
 				spec2.WriteMemory(num3, (byte)(this._spec.CPU.regs.PC >> 8));
 				num -= 2;
 				stream.Write(this._spec.GetRamImage(5), 0, 16384);
@@ -205,11 +205,11 @@ namespace ZXMAK.Engine.Loaders.SnapshotSerializers
 				stream.Write(this._spec.GetRamImage((int)(b & 7)), 0, 16384);
 				Spectrum spec3 = this._spec;
 				ushort num4 = num;
-				num = num4 + 1;
+				num = (ushort)(num4 + 1);
 				spec3.WriteMemory(num4, value);
 				Spectrum spec4 = this._spec;
 				ushort num5 = num;
-				num = num5 + 1;
+				num = (ushort)(num5 + 1);
 				spec4.WriteMemory(num5, value2);
 				return;
 			}

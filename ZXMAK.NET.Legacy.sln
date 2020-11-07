@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXMAK.MDX", "ZXMAK.MDX\ZXMAK.MDX.csproj", "{2E557922-582C-469A-8181-EB0B8CBEF0E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXMAK.MDX", "ZXMAK.MDX\ZXMAK.MDX.csproj", "{2E557922-582C-469A-8181-EB0B8CBEF0E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXMAK.SDL", "ZXMAK.SDL\ZXMAK.SDL.csproj", "{2E557922-582C-469A-8181-EB0B8CBEF0E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXMAK.SDL", "ZXMAK.SDL\ZXMAK.SDL.csproj", "{2E557922-582C-469A-8181-EB0B8CBEF0E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXMAK.XNA2.Win", "ZXMAK.XNA2.Win\ZXMAK.XNA2.Win.csproj", "{2E557922-582C-469A-8181-EB0B8CBEF0E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXMAK.XNA2.Win", "ZXMAK.XNA2.Win\ZXMAK.XNA2.Win.csproj", "{2E557922-582C-469A-8181-EB0B8CBEF0E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipLib", "ZipLib\ZipLib.csproj", "{2E557922-582C-469A-8181-EB0B8CBEF0DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZipLib", "ZipLib\ZipLib.csproj", "{2E557922-582C-469A-8181-EB0B8CBEF0DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXMAK.Engine", "ZXMAK.Engine\ZXMAK.Engine.csproj", "{2E557922-582C-469A-8181-EB0B8CBEF0DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXMAK.Engine", "ZXMAK.Engine\ZXMAK.Engine.csproj", "{2E557922-582C-469A-8181-EB0B8CBEF0DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXMAK.Windows.Forms", "ZXMAK.Windows.Forms\ZXMAK.Windows.Forms.csproj", "{2E557922-582C-469A-8181-EB0B8CBEF0E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXMAK.Windows.Forms", "ZXMAK.Windows.Forms\ZXMAK.Windows.Forms.csproj", "{2E557922-582C-469A-8181-EB0B8CBEF0E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,5 +48,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E900801-C8D3-451E-9B3E-C68BE49A7CE5}
 	EndGlobalSection
 EndGlobal

@@ -106,7 +106,7 @@ namespace ZXMAK.Engine.Loaders.SnapshotSerializers
 			this._spec.CPU.regs.IY = FormatSerializer.getUInt16(array, 23);
 			this._spec.CPU.regs.SP = FormatSerializer.getUInt16(array, 8);
 			this._spec.CPU.regs.I = array[10];
-			this._spec.CPU.regs.R = (array[11] | (((array[12] & 1) != 0) ? 128 : 0));
+			this._spec.CPU.regs.R = (byte)((array[11] | (((array[12] & 1) != 0) ? 128 : 0)));
 			if (num == 1)
 			{
 				this._spec.CPU.regs.PC = FormatSerializer.getUInt16(array, 6);
@@ -117,7 +117,7 @@ namespace ZXMAK.Engine.Loaders.SnapshotSerializers
 			}
 			this._spec.CPU.IFF1 = (array[27] != 0);
 			this._spec.CPU.IFF2 = (array[28] != 0);
-			this._spec.CPU.IM = (array[29] & 3);
+			this._spec.CPU.IM = (byte)((array[29] & 3));
 			this._spec.CPU.HALTED = false;
 			if (this._spec is ISpectrum)
 			{
@@ -288,7 +288,7 @@ namespace ZXMAK.Engine.Loaders.SnapshotSerializers
 			FormatSerializer.setUint16(array, 23, this._spec.CPU.regs.IY);
 			FormatSerializer.setUint16(array, 8, this._spec.CPU.regs.SP);
 			array[10] = this._spec.CPU.regs.I;
-			array[11] = (this._spec.CPU.regs.R & 127);
+			array[11] = (byte)((this._spec.CPU.regs.R & 127));
 			if ((this._spec.CPU.regs.R & 128) != 0)
 			{
 				byte[] array3 = array;

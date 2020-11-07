@@ -401,7 +401,7 @@ namespace ZXMAK.Engine
 		{
 			if (((state.OutState ^ state.OldOutState) & 64) != 0)
 			{
-				state.InState = (((state.OutState & 64) != 0) ? (this.ReadAyMouseY() | 64) : this.ReadAyMouseX());
+				state.InState = (byte)((((state.OutState & 64) != 0) ? (this.ReadAyMouseY() | 64) : this.ReadAyMouseX()));
 			}
 		}
 
@@ -421,7 +421,7 @@ namespace ZXMAK.Engine
 						if (this._tape.IsPlay)
 						{
 							this._portFE &= 191;
-							this._portFE |= (this._tape.GetTapeBit(this._cpu.Tact) & 64);
+							this._portFE |= (byte)((this._tape.GetTapeBit(this._cpu.Tact) & 64));
 							this.processAudioChanges(this.GetFrameTact());
 						}
 						if (this._breakpoints != null && this.CheckBreakpoint(this._cpu.regs.PC))
@@ -597,7 +597,7 @@ namespace ZXMAK.Engine
 			if ((ADDR & 255) == 254)
 			{
 				this._portFE &= 191;
-				this._portFE |= (this._tape.GetTapeBit(this._cpu.Tact) & 64);
+				this._portFE |= (byte)((this._tape.GetTapeBit(this._cpu.Tact) & 64));
 				return (byte)((31 & this.scanKbdPort(ADDR)) | (int)(this._portFE & 64) | (int)(this.CPU.FreeBUS & 160));
 			}
 			if ((ADDR & 255) == 255)
@@ -667,7 +667,7 @@ namespace ZXMAK.Engine
 				this.processVideoChanges();
 				this._portFE = value;
 				this._portFE &= 191;
-				this._portFE |= (this._tape.GetTapeBit(this._cpu.Tact) & 64);
+				this._portFE |= (byte)((byte)((this._tape.GetTapeBit(this._cpu.Tact) & 64)));
 			}
 			if ((ADDR & 32770) == 0 && (this._port7FFD & 32) == 0)
 			{

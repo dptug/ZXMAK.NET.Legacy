@@ -422,7 +422,7 @@ namespace ZXMAK.Engine.Disk
 						this.trkcache.RawWrite(this.rwptr++, 161, true);
 						this.rwlen++;
 					}
-					this.trkcache.RawWrite(this.rwptr++, ((this.cmd & 1) != 0) ? 248 : 251, false);
+					this.trkcache.RawWrite(this.rwptr++, (byte)(((this.cmd & 1) != 0) ? 248 : 251), false);
 					this.rwlen = 128 << (int)((SECHDR)this.trkcache.HeaderList[this.foundid]).l;
 					this.state = WDSTATE.S_WRITE;
 					continue;
