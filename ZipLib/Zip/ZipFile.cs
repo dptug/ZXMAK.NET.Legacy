@@ -898,13 +898,13 @@ namespace ZipLib.Zip
 
 		private void WriteLeLong(long value)
 		{
-			this.WriteLEInt((int)(value & (long)((ulong)-1)));
+			this.WriteLEInt((int)(value & unchecked((long)((ulong)-1))));
 			this.WriteLEInt((int)(value >> 32));
 		}
 
 		private void WriteLEUlong(ulong value)
 		{
-			this.WriteLEUint((uint)(value & (ulong)-1));
+			this.WriteLEUint((uint)(value & unchecked((ulong)-1)));
 			this.WriteLEUint((uint)(value >> 32));
 		}
 
@@ -1027,15 +1027,15 @@ namespace ZipLib.Zip
 			this.WriteLEShort((int)((byte)entry.CompressionMethod));
 			this.WriteLEInt((int)entry.DosTime);
 			this.WriteLEInt((int)entry.Crc);
-			if (entry.CompressedSize >= (long)((ulong)-1))
+			if (entry.CompressedSize >= unchecked((long)((ulong)-1)))
 			{
 				this.WriteLEInt(-1);
 			}
 			else
 			{
-				this.WriteLEInt((int)(entry.CompressedSize & (long)((ulong)-1)));
+				this.WriteLEInt((int)(entry.CompressedSize & unchecked((long)((ulong)-1))));
 			}
-			if (entry.Size >= (long)((ulong)-1))
+			if (entry.Size >= unchecked((long)((ulong)-1)))
 			{
 				this.WriteLEInt(-1);
 			}
@@ -1053,15 +1053,15 @@ namespace ZipLib.Zip
 			if (entry.CentralHeaderRequiresZip64)
 			{
 				zipExtraData.StartNewEntry();
-				if (entry.Size >= (long)((ulong)-1) || this.useZip64_ == UseZip64.On)
+				if (entry.Size >= unchecked((long)((ulong)-1)) || this.useZip64_ == UseZip64.On)
 				{
 					zipExtraData.AddLeLong(entry.Size);
 				}
-				if (entry.CompressedSize >= (long)((ulong)-1) || this.useZip64_ == UseZip64.On)
+				if (entry.CompressedSize >= unchecked((long)((ulong)-1)) || this.useZip64_ == UseZip64.On)
 				{
 					zipExtraData.AddLeLong(entry.CompressedSize);
 				}
-				if (entry.Offset >= (long)((ulong)-1))
+				if (entry.Offset >= unchecked((long)((ulong)-1)))
 				{
 					zipExtraData.AddLeLong(entry.Offset);
 				}
@@ -1088,7 +1088,7 @@ namespace ZipLib.Zip
 			{
 				this.WriteLEUint(0U);
 			}
-			if (entry.Offset >= (long)((ulong)-1))
+			if (entry.Offset >= unchecked((long)((ulong)-1)))
 			{
 				this.WriteLEUint(uint.MaxValue);
 			}
@@ -1700,7 +1700,7 @@ namespace ZipLib.Zip
 			{
 				throw new IOException("End of stream");
 			}
-			return (ushort)num | (ushort)(num2 << 8);
+			return Convert.ToUInt16(((ushort)num) | (ushort)(num2 << 8));
 		}
 
 		private uint ReadLEUint()
@@ -1752,7 +1752,7 @@ namespace ZipLib.Zip
 				this.comment_ = string.Empty;
 			}
 			bool flag = false;
-			if (num2 == 65535 || num3 == 65535 || num4 == 65535UL || num5 == 65535UL || num6 == (ulong)-1 || num7 == (long)((ulong)-1))
+			if (num2 == 65535 || num3 == 65535 || num4 == 65535UL || num5 == 65535UL || num6 == unchecked((ulong)-1) || num7 == unchecked((long)((ulong)-1)))
 			{
 				flag = true;
 				long num9 = this.LocateBlockWithSignature(117853008, num, 0, 4096);
@@ -1814,9 +1814,9 @@ namespace ZipLib.Zip
 				StreamUtils.ReadFully(this.baseStream_, array2, 0, num18);
 				string name = ZipConstants.ConvertToStringExt(num13, array2, num18);
 				ZipEntry zipEntry = new ZipEntry(name, versionRequiredToExtract, madeByInfo, (CompressionMethod)method);
-				zipEntry.Crc = (long)((ulong)num15 & (ulong)-1);
-				zipEntry.Size = (num17 & (long)((ulong)-1));
-				zipEntry.CompressedSize = (num16 & (long)((ulong)-1));
+				zipEntry.Crc = (long)((ulong)num15 & unchecked((ulong)-1));
+				zipEntry.Size = (num17 & unchecked((long)((ulong)-1)));
+				zipEntry.CompressedSize = (num16 & unchecked((long)((ulong)-1)));
 				zipEntry.Flags = num13;
 				zipEntry.DosTime = (long)((ulong)num14);
 				if ((num13 & 8) == 0)

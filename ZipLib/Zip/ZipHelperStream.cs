@@ -147,7 +147,7 @@ namespace ZipLib.Zip
 
 		public void WriteEndOfCentralDirectory(long noOfEntries, long sizeEntries, long startOfCentralDirectory, byte[] comment)
 		{
-			if (noOfEntries >= 65535L || startOfCentralDirectory >= (long)((ulong)-1) || sizeEntries >= (long)((ulong)-1))
+			if (noOfEntries >= 65535L || startOfCentralDirectory >= unchecked((long)((ulong)-1)) || sizeEntries >= unchecked((long)((ulong)-1)))
 			{
 				this.WriteZip64EndOfCentralDirectory(noOfEntries, sizeEntries, startOfCentralDirectory);
 			}
@@ -164,7 +164,7 @@ namespace ZipLib.Zip
 				this.WriteLEShort((int)((short)noOfEntries));
 				this.WriteLEShort((int)((short)noOfEntries));
 			}
-			if (sizeEntries >= (long)((ulong)-1))
+			if (sizeEntries >= unchecked((long)((ulong)-1)))
 			{
 				this.WriteLEUint(uint.MaxValue);
 			}
@@ -172,7 +172,7 @@ namespace ZipLib.Zip
 			{
 				this.WriteLEInt((int)sizeEntries);
 			}
-			if (startOfCentralDirectory >= (long)((ulong)-1))
+			if (startOfCentralDirectory >= unchecked((long)((ulong)-1)))
 			{
 				this.WriteLEUint(uint.MaxValue);
 			}
@@ -239,7 +239,7 @@ namespace ZipLib.Zip
 
 		public void WriteLEUlong(ulong value)
 		{
-			this.WriteLEUint((uint)(value & (ulong)-1));
+			this.WriteLEUint((uint)(value & unchecked((ulong)-1)));
 			this.WriteLEUint((uint)(value >> 32));
 		}
 

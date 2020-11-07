@@ -22,7 +22,7 @@ namespace ZipLib.Encryption
 			for (int i = inputOffset; i < inputOffset + inputCount; i++)
 			{
 				byte ch = inputBuffer[i];
-				outputBuffer[outputOffset++] = (inputBuffer[i] ^ base.TransformByte());
+				outputBuffer[outputOffset++] = Convert.ToByte((inputBuffer[i] ^ base.TransformByte()));
 				base.UpdateKeys(ch);
 			}
 			return inputCount;

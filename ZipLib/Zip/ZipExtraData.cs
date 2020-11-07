@@ -184,7 +184,7 @@ namespace ZipLib.Zip
 
 		public void AddLeLong(long toAdd)
 		{
-			this.AddLeInt((int)(toAdd & (long)((ulong)-1)));
+			this.AddLeInt((int)(toAdd & unchecked((long)((ulong)-1))));
 			this.AddLeInt((int)(toAdd >> 32));
 		}
 
@@ -207,7 +207,7 @@ namespace ZipLib.Zip
 		public long ReadLong()
 		{
 			this.ReadCheck(8);
-			return ((long)this.ReadInt() & (long)((ulong)-1)) | (long)this.ReadInt() << 32;
+			return ((long)this.ReadInt() & unchecked((long)((ulong)-1))) | (long)this.ReadInt() << 32;
 		}
 
 		public int ReadInt()

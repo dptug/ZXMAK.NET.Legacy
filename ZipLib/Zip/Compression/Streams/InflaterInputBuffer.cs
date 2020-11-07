@@ -175,7 +175,7 @@ namespace ZipLib.Zip.Compression.Streams
 					throw new ZipException("EOF in header");
 				}
 			}
-			byte result = this.rawData[this.rawLength - this.available] & byte.MaxValue;
+			byte result = Convert.ToByte(this.rawData[this.rawLength - this.available] & byte.MaxValue);
 			this.available--;
 			return (int)result;
 		}

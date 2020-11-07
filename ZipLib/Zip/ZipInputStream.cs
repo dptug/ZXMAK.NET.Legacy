@@ -77,24 +77,24 @@ namespace ZipLib.Zip
 			this.entry.CompressionMethod = (CompressionMethod)this.method;
 			if ((this.flags & 8) == 0)
 			{
-				this.entry.Crc = ((long)num3 & (long)((ulong)-1));
-				this.entry.Size = (this.size & (long)((ulong)-1));
-				this.entry.CompressedSize = (this.csize & (long)((ulong)-1));
+				this.entry.Crc = ((long)num3 & unchecked((long)((ulong)-1)));
+				this.entry.Size = (this.size & unchecked((long)((ulong)-1)));
+				this.entry.CompressedSize = (this.csize & unchecked((long)((ulong)-1)));
 				this.entry.CryptoCheckValue = (byte)(num3 >> 24);
 			}
 			else
 			{
 				if (num3 != 0)
 				{
-					this.entry.Crc = ((long)num3 & (long)((ulong)-1));
+					this.entry.Crc = ((long)num3 & unchecked((long)((ulong)-1)));
 				}
 				if (this.size != 0L)
 				{
-					this.entry.Size = (this.size & (long)((ulong)-1));
+					this.entry.Size = (this.size & unchecked((long)((ulong)-1)));
 				}
 				if (this.csize != 0L)
 				{
-					this.entry.CompressedSize = (this.csize & (long)((ulong)-1));
+					this.entry.CompressedSize = (this.csize & unchecked((long)((ulong)-1)));
 				}
 				this.entry.CryptoCheckValue = (byte)(num2 >> 8 & 255U);
 			}
@@ -135,7 +135,7 @@ namespace ZipLib.Zip
 			{
 				throw new ZipException("Data descriptor signature not found");
 			}
-			this.entry.Crc = ((long)this.inputBuffer.ReadLeInt() & (long)((ulong)-1));
+			this.entry.Crc = ((long)this.inputBuffer.ReadLeInt() & unchecked((long)((ulong)-1)));
 			if (this.entry.LocalHeaderRequiresZip64)
 			{
 				this.csize = this.inputBuffer.ReadLeLong();
@@ -158,7 +158,7 @@ namespace ZipLib.Zip
 				this.ReadDataDescriptor();
 			}
 			this.size = 0L;
-			if (testCrc && (this.crc.Value & (long)((ulong)-1)) != this.entry.Crc && this.entry.Crc != -1L)
+			if (testCrc && (this.crc.Value & unchecked((long)((ulong)-1))) != this.entry.Crc && this.entry.Crc != -1L)
 			{
 				throw new ZipException("CRC mismatch");
 			}
@@ -203,7 +203,7 @@ namespace ZipLib.Zip
 				this.inputBuffer.Available = 0;
 				while (this.csize != 0L)
 				{
-					int num = (int)base.Skip(this.csize & (long)((ulong)-1));
+					int num = (int)base.Skip(this.csize & unchecked((long)((ulong)-1)));
 					if (num <= 0)
 					{
 						throw new ZipException("Zip archive ends early.");

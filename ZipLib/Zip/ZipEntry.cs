@@ -18,7 +18,6 @@ namespace ZipLib.Zip
 			this.externalFileAttributes = -1;
 			this.method = CompressionMethod.Deflated;
 			this.zipFileIndex = -1L;
-			base..ctor();
 			if (name == null)
 			{
 				throw new ArgumentNullException("ZipEntry name");
@@ -44,7 +43,6 @@ namespace ZipLib.Zip
 			this.externalFileAttributes = -1;
 			this.method = CompressionMethod.Deflated;
 			this.zipFileIndex = -1L;
-			base..ctor();
 			if (entry == null)
 			{
 				throw new ArgumentNullException("entry");
@@ -272,7 +270,7 @@ namespace ZipLib.Zip
 					{
 						num += 12UL;
 					}
-					flag = ((this.size >= (ulong)-1 || num >= (ulong)-1) && (this.versionToExtract == 0 || this.versionToExtract >= 45));
+					flag = ((this.size >= unchecked((ulong)-1) || num >= unchecked((ulong)-1)) && (this.versionToExtract == 0 || this.versionToExtract >= 45));
 				}
 				return flag;
 			}
@@ -282,7 +280,7 @@ namespace ZipLib.Zip
 		{
 			get
 			{
-				return this.LocalHeaderRequiresZip64 || this.offset >= (long)((ulong)-1);
+				return this.LocalHeaderRequiresZip64 || this.offset >= unchecked((long)((ulong)-1));
 			}
 		}
 
@@ -375,7 +373,7 @@ namespace ZipLib.Zip
 				{
 					return -1L;
 				}
-				return (long)((ulong)this.crc & (ulong)-1);
+				return (long)((ulong)this.crc & unchecked((ulong)-1));
 			}
 			set
 			{
@@ -440,16 +438,16 @@ namespace ZipLib.Zip
 				{
 					throw new ZipException("Extra data extended Zip64 information length is invalid");
 				}
-				if (localHeader || this.size == (ulong)-1)
+				if (localHeader || this.size == unchecked((ulong)-1))
 				{
 					this.size = (ulong)zipExtraData.ReadLong();
 				}
-				if (localHeader || this.compressedSize == (ulong)-1)
+				if (localHeader || this.compressedSize == unchecked((ulong)-1))
 				{
 					this.compressedSize = (ulong)zipExtraData.ReadLong();
 				}
 			}
-			else if ((this.versionToExtract & 255) >= 45 && (this.size == (ulong)-1 || this.compressedSize == (ulong)-1))
+			else if ((this.versionToExtract & 255) >= 45 && (this.size == unchecked((ulong)-1) || this.compressedSize == unchecked((ulong)-1)))
 			{
 				throw new ZipException("Zip64 Extended information required but is missing.");
 			}
