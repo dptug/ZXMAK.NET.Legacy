@@ -56,7 +56,7 @@ namespace ZXMAK.Engine.Disk
 								if (sechdr.dataOffset + sechdr.datlen + 2 > this._trackImage.Length)
 								{
 									sechdr.datlen = this._trackImage.Length - sechdr.dataOffset;
-									sechdr.crc2 = (this.WD1793_CRC(sechdr.dataOffset - 1, sechdr.datlen + 1) ^ ushort.MaxValue);
+									sechdr.crc2 = (ushort)((this.WD1793_CRC(sechdr.dataOffset - 1, sechdr.datlen + 1) ^ ushort.MaxValue));
 									sechdr.c2 = false;
 									break;
 								}

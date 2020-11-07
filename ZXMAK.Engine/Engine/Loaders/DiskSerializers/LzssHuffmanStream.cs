@@ -104,7 +104,7 @@ namespace ZXMAK.Engine.Loaders.DiskSerializers
 			i = 0;
 			for (int j = 314; j <= 626; j++)
 			{
-				this.freq[j] = this.freq[i] + this.freq[i + 1];
+				this.freq[j] = (ushort)(this.freq[i] + this.freq[i + 1]);
 				this.son[j] = (short)i;
 				this.prnt[i] = (this.prnt[i + 1] = (short)j);
 				i += 2;
@@ -130,7 +130,7 @@ namespace ZXMAK.Engine.Loaders.DiskSerializers
 						buf[startIndex++] = (byte)num;
 						byte[] array = this.text_buf;
 						ushort r;
-						this._r = (r = this._r) + 1;
+						this._r = (ushort)((r = this._r) + 1);
 						array[(int)r] = (byte)num;
 						this._r &= 4095;
 						i++;
@@ -142,7 +142,7 @@ namespace ZXMAK.Engine.Loaders.DiskSerializers
 						{
 							return i;
 						}
-						this._bufpos = (this._r - (ushort)num2 - 1 & 4095);
+						this._bufpos = (ushort)((this._r - (ushort)num2 - 1 & 4095));
 						this._bufcnt = (ushort)(num - 255 + 2);
 						this._bufndx = 0;
 					}
@@ -156,7 +156,7 @@ namespace ZXMAK.Engine.Loaders.DiskSerializers
 						this._bufndx += 1;
 						byte[] array2 = this.text_buf;
 						ushort r2;
-						this._r = (r2 = this._r) + 1;
+						this._r = (ushort)((r2 = this._r) + 1);
 						array2[(int)r2] = (byte)num;
 						this._r &= 4095;
 						i++;
@@ -201,7 +201,7 @@ namespace ZXMAK.Engine.Loaders.DiskSerializers
 			for (;;)
 			{
 				ushort num5 = num4;
-				num4 = num5 - 1;
+				num4 = (ushort)(num5 - 1);
 				if (num5 == 0)
 				{
 					goto Block_3;
@@ -303,7 +303,7 @@ namespace ZXMAK.Engine.Loaders.DiskSerializers
 			{
 				if (this.son[(int)num2] >= 627)
 				{
-					this.freq[(int)num] = (this.freq[(int)num2] + 1) / 2;
+					this.freq[(int)num] = (ushort)((this.freq[(int)num2] + 1) / 2);
 					this.son[(int)num] = this.son[(int)num2];
 					num += 1;
 				}
@@ -311,9 +311,9 @@ namespace ZXMAK.Engine.Loaders.DiskSerializers
 			num2 = 0;
 			for (num = 314; num < 627; num += 1)
 			{
-				short num3 = num2 + 1;
-				ushort num4 = this.freq[(int)num] = this.freq[(int)num2] + this.freq[(int)num3];
-				num3 = num - 1;
+				short num3 = (short)(num2 + 1);
+				ushort num4 = this.freq[(int)num] = (ushort)(this.freq[(int)num2] + this.freq[(int)num3]);
+				num3 = (short)(num - 1);
 				while (num4 < this.freq[(int)num3])
 				{
 					num3 -= 1;
