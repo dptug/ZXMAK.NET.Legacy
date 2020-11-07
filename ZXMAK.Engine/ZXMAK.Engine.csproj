@@ -1,127 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2E557922-582C-469A-8181-EB0B8CBEF0DF}</ProjectGuid>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>ZXMAK</RootNamespace>
-    <AssemblyName>ZXMAK.Engine</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>4096</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\Config.cs" />
-    <Compile Include="Engine\AY\AY8910.cs" />
-    <Compile Include="Engine\AY\AyPortState.cs" />
-    <Compile Include="Engine\AY\AyUpdatePortDelegate.cs" />
-    <Compile Include="Engine\Disk\BETA_STATUS.cs" />
-    <Compile Include="Engine\Disk\DiskImage.cs" />
-    <Compile Include="Engine\Disk\ModifyFlag.cs" />
-    <Compile Include="Engine\Disk\RegWD1793.cs" />
-    <Compile Include="Engine\Disk\SaveDiskDelegate.cs" />
-    <Compile Include="Engine\Disk\SECHDR.cs" />
-    <Compile Include="Engine\Disk\Sector.cs" />
-    <Compile Include="Engine\Disk\SimpleSector.cs" />
-    <Compile Include="Engine\Disk\Track.cs" />
-    <Compile Include="Engine\Disk\WD1793.cs" />
-    <Compile Include="Engine\Disk\WDSTATE.cs" />
-    <Compile Include="Engine\Disk\WD_STATUS.cs" />
-    <Compile Include="Engine\IAyDevice.cs" />
-    <Compile Include="Engine\IBetaDiskDevice.cs" />
-    <Compile Include="Engine\ISpectrum.cs" />
-    <Compile Include="Engine\ISpectrum128K.cs" />
-    <Compile Include="Engine\ITapeDevice.cs" />
-    <Compile Include="Engine\IVideoDevice.cs" />
-    <Compile Include="Engine\IVideoRenderer.cs" />
-    <Compile Include="Engine\Loaders\DiskLoadManager.cs" />
-    <Compile Include="Engine\Loaders\DiskSerializers\FdiSerializer.cs" />
-    <Compile Include="Engine\Loaders\DiskSerializers\HobetaSerializer.cs" />
-    <Compile Include="Engine\Loaders\DiskSerializers\LzssHuffmanStream.cs" />
-    <Compile Include="Engine\Loaders\DiskSerializers\SclSerializer.cs" />
-    <Compile Include="Engine\Loaders\DiskSerializers\Td0Serializer.cs" />
-    <Compile Include="Engine\Loaders\DiskSerializers\TrdSerializer.cs" />
-    <Compile Include="Engine\Loaders\DiskSerializers\UdiSerializer.cs" />
-    <Compile Include="Engine\Loaders\FormatSerializer.cs" />
-    <Compile Include="Engine\Loaders\LoadManager.cs" />
-    <Compile Include="Engine\Loaders\SerializeManager.cs" />
-    <Compile Include="Engine\Loaders\SnapshotSerializers\ScrSerializer.cs" />
-    <Compile Include="Engine\Loaders\SnapshotSerializers\SitSerializer.cs" />
-    <Compile Include="Engine\Loaders\SnapshotSerializers\SnaSerializer.cs" />
-    <Compile Include="Engine\Loaders\SnapshotSerializers\Z80Serializer.cs" />
-    <Compile Include="Engine\Loaders\SnapshotSerializers\ZxSerializer.cs" />
-    <Compile Include="Engine\Loaders\TapeSerializers\CswSerializer.cs" />
-    <Compile Include="Engine\Loaders\TapeSerializers\TapSerializer.cs" />
-    <Compile Include="Engine\Loaders\TapeSerializers\TzxSerializer.cs" />
-    <Compile Include="Engine\MaxTactExceedEventArgs.cs" />
-    <Compile Include="Engine\OnBreakpointDelegate.cs" />
-    <Compile Include="Engine\OnMaxTactExceedDelegate.cs" />
-    <Compile Include="Engine\OnUpdateStateDelegate.cs" />
-    <Compile Include="Engine\Pentagon128.cs" />
-    <Compile Include="Engine\Profi1024.cs" />
-    <Compile Include="Engine\RomName.cs" />
-    <Compile Include="Engine\Speaker.cs" />
-    <Compile Include="Engine\Spectrum.cs" />
-    <Compile Include="Engine\Tape\TapeBlock.cs" />
-    <Compile Include="Engine\Tape\TapeCommand.cs" />
-    <Compile Include="Engine\Tape\TapeDevice.cs" />
-    <Compile Include="Engine\VideoManager.cs" />
-    <Compile Include="Engine\VideoParams.cs" />
-    <Compile Include="Engine\Z80\OnCALLBACK.cs" />
-    <Compile Include="Engine\Z80\OnRDMEM.cs" />
-    <Compile Include="Engine\Z80\OnRDPORT.cs" />
-    <Compile Include="Engine\Z80\OnWRMEM.cs" />
-    <Compile Include="Engine\Z80\OnWRPORT.cs" />
-    <Compile Include="Engine\Z80\OPFX.cs" />
-    <Compile Include="Engine\Z80\OPXFX.cs" />
-    <Compile Include="Engine\Z80\Registers.cs" />
-    <Compile Include="Engine\Z80\Z80CPU.cs" />
-    <Compile Include="Engine\Z80\ZFLAGS.cs" />
-    <Compile Include="Logging\Log.cs" />
-    <Compile Include="Logging\Logger.cs" />
-    <Compile Include="Logging\LogLevel.cs" />
-    <Compile Include="Logging\LogMessage.cs" />
-    <Compile Include="Platform\GenericPlatform.cs" />
-    <Compile Include="Platform\PlatformFactory.cs" />
-    <Compile Include="Platform\QueryButtons.cs" />
-    <Compile Include="Platform\QueryResult.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <ProjectReference Include="..\ZipLib\ZipLib.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ZipLib\ZipLib.csproj">
-      <Project>{2e557922-582c-469a-8181-eb0b8cbef0de}</Project>
-      <Name>ZipLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
