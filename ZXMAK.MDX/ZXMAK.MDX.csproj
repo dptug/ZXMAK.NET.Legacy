@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ZXMAK.Platform.MDX</RootNamespace>
     <AssemblyName>ZXMAK.MDX</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>4096</FileAlignment>
     <StartupObject>ZXMAK.Platform.MDX.Program</StartupObject>
   </PropertyGroup>

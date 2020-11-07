@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ZXMAK.Platform.SDL</RootNamespace>
     <AssemblyName>ZXMAK.SDL</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>4096</FileAlignment>
     <StartupObject>ZXMAK.Platform.SDL.Program</StartupObject>
   </PropertyGroup>

@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ZXMAK.Platform.XNA2.Win</RootNamespace>
     <AssemblyName>ZXMAK.XNA2.Win</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>4096</FileAlignment>
     <StartupObject>ZXMAK.Platform.XNA2.Win.Program</StartupObject>
   </PropertyGroup>
