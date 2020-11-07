@@ -735,7 +735,7 @@ namespace ZXMAK.Engine
 			{
 				num = this.GetFrameTactCount();
 			}
-			this.fetchVideo(this._bitmapBufPtr, this._lastFrameTact, num, ref this._ulaFetchBW, ref this._ulaFetchAT, ref this._ulaFetchInk, ref this._ulaFetchPaper);
+			unsafe { this.fetchVideo(this._bitmapBufPtr, this._lastFrameTact, num, ref this._ulaFetchBW, ref this._ulaFetchAT, ref this._ulaFetchInk, ref this._ulaFetchPaper); }
 			this._lastFrameTact = num;
 		}
 

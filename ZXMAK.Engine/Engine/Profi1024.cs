@@ -505,9 +505,12 @@ namespace ZXMAK.Engine
 
 		private void flushFrame()
 		{
-			if (this._soundBufPtr != null)
+			unsafe
 			{
-				this.mixSound(this._soundBufPtr, this._speaker.FlushFrame(), this._sound.flush());
+				if (this._soundBufPtr != null)
+				{
+					this.mixSound(this._soundBufPtr, this._speaker.FlushFrame(), this._sound.flush());
+				}
 			}
 			this.processVideoChanges();
 			this._lastFrameTact = 0;
@@ -534,7 +537,7 @@ namespace ZXMAK.Engine
 			{
 				num = this.GetFrameTactCount();
 			}
-			this.fetchVideo(this._bitmapBufPtr, this._lastFrameTact, num, ref this._ulaFetchBW, ref this._ulaFetchAT, ref this._ulaFetchInk, ref this._ulaFetchPaper);
+			unsafe { this.fetchVideo(this._bitmapBufPtr, this._lastFrameTact, num, ref this._ulaFetchBW, ref this._ulaFetchAT, ref this._ulaFetchInk, ref this._ulaFetchPaper); }
 			this._lastFrameTact = num;
 		}
 
