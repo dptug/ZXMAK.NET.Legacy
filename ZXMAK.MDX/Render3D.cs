@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Microsoft.DirectX.Direct3D;
+using SharpDX.Direct3D9;
 using ZXMAK.Logging;
 
 namespace ZXMAK.Platform.MDX
 {
-	public class Render3D : Control
+    public class Render3D : Control
 	{
 		public Render3D()
 		{
@@ -45,12 +45,16 @@ namespace ZXMAK.Platform.MDX
 			this._presentParams = new PresentParameters();
 			this._presentParams.Windowed = true;
 			this._presentParams.SwapEffect = SwapEffect.Discard;
-			this._presentParams.BackBufferFormat = Manager.Adapters.Default.CurrentDisplayMode.Format;
+			this._presentParams.BackBufferFormat = SharpDX.Direct3D9.Format.Unknown; /*Manager.Adapters.Default.CurrentDisplayMode.Format;*/
 			this._presentParams.BackBufferCount = 1;
 			this._presentParams.PresentationInterval = PresentInterval.One;
 			this._presentParams.BackBufferWidth = 640;
 			this._presentParams.BackBufferHeight = 480;
-			this.D3D = new Device(0, DeviceType.Hardware, base.Handle, behaviorFlags, new PresentParameters[]
+
+			//public Device(Direct3D direct3D, int adapter, DeviceType deviceType, IntPtr hFocusWindow, CreateFlags behaviorFlags, params PresentParameters[] presentationParametersRef);
+
+
+			this.D3D = new Device(new Direct3D(), 0, DeviceType.Hardware, base.Handle, behaviorFlags, new PresentParameters[]
 			{
 				this._presentParams
 			});
@@ -126,7 +130,7 @@ namespace ZXMAK.Platform.MDX
 					}
 					else
 					{
-						this.D3D.Clear(ClearFlags.Target, 0, 1f, 0);
+						this.D3D.Clear(ClearFlags.Target, (SharpDX.Mathematics.Interop.RawColorBGRA)(object)(0), 1f, 0);
 						this.D3D.BeginScene();
 						this.OnRenderScene();
 						this.D3D.EndScene();
@@ -152,7 +156,7 @@ namespace ZXMAK.Platform.MDX
 			{
 				if (this.D3D != null)
 				{
-					return this.D3D.DisplayMode.RefreshRate;
+					return this._DisplayMode.RefreshRate;
 				}
 				return 0;
 			}
@@ -163,6 +167,8 @@ namespace ZXMAK.Platform.MDX
 		private int _frameCounter;
 
 		protected Device D3D;
+
+		protected DisplayMode _DisplayMode;
 
 		private PresentParameters _presentParams;
 	}

@@ -16,6 +16,13 @@
     <EmbeddedResource Include="MainForm.resources" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="SharpDX" Version="4.2.0" />
+    <PackageReference Include="SharpDX.Direct3D9" Version="4.2.0" />
+    <PackageReference Include="SharpDX.DirectInput" Version="4.2.0" />
+    <PackageReference Include="SharpDX.DirectSound" Version="4.2.0" />
+    <PackageReference Include="SharpDX.DXGI" Version="4.2.0" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ZXMAK.Engine\ZXMAK.Engine.csproj" />
     <ProjectReference Include="..\ZXMAK.Windows.Forms\ZXMAK.Windows.Forms.csproj" />
   </ItemGroup>
