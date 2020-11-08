@@ -135,38 +135,38 @@
 
 		private global::ZXMAK.Platform.MDX.RenderVideo vctl;
 
-		private global::System.Windows.Forms.MainMenu mainMenu;
+		private global::System.Windows.Forms.MenuStrip mainMenu;
 
-		private global::System.Windows.Forms.MenuItem menuFile;
+		private global::System.Windows.Forms.ToolStripMenuItem menuFile;
 
-		private global::System.Windows.Forms.MenuItem menuFileOpen;
+		private global::System.Windows.Forms.ToolStripMenuItem menuFileOpen;
 
-		private global::System.Windows.Forms.MenuItem menuFileSaveAs;
+		private global::System.Windows.Forms.ToolStripMenuItem menuFileSaveAs;
 
-		private global::System.Windows.Forms.MenuItem menuFileEjectDisk;
+		private global::System.Windows.Forms.ToolStripMenuItem menuFileEjectDisk;
 
-		private global::System.Windows.Forms.MenuItem menuControl;
+		private global::System.Windows.Forms.ToolStripMenuItem menuControl;
 
-		private global::System.Windows.Forms.MenuItem menuControlStart;
+		private global::System.Windows.Forms.ToolStripMenuItem menuControlStart;
 
-		private global::System.Windows.Forms.MenuItem menuControlStop;
+		private global::System.Windows.Forms.ToolStripMenuItem menuControlStop;
 
-		private global::System.Windows.Forms.MenuItem menuTools;
+		private global::System.Windows.Forms.ToolStripMenuItem menuTools;
 
-		private global::System.Windows.Forms.MenuItem menuToolsTape;
+		private global::System.Windows.Forms.ToolStripMenuItem menuToolsTape;
 
-		private global::System.Windows.Forms.MenuItem menuItem3;
+		private global::System.Windows.Forms.ToolStripMenuItem menuItem3;
 
-		private global::System.Windows.Forms.MenuItem menuToolsDebugger;
+		private global::System.Windows.Forms.ToolStripMenuItem menuToolsDebugger;
 
-		private global::System.Windows.Forms.MenuItem menuToolsWD1793;
+		private global::System.Windows.Forms.ToolStripMenuItem menuToolsWD1793;
 
-		private global::System.Windows.Forms.MenuItem menuHelp;
+		private global::System.Windows.Forms.ToolStripMenuItem menuHelp;
 
-		private global::System.Windows.Forms.MenuItem menuHelpAbout;
+		private global::System.Windows.Forms.ToolStripMenuItem menuHelpAbout;
 
-		private global::System.Windows.Forms.MenuItem menuFileSplitter;
+		private global::System.Windows.Forms.ToolStripMenuItem menuFileSplitter;
 
-		private global::System.Windows.Forms.MenuItem menuFileExit;
+		private global::System.Windows.Forms.ToolStripMenuItem menuFileExit;
 	}
 }

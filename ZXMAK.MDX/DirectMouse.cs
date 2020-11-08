@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Microsoft.DirectX.DirectInput;
+using SharpDX.DirectInput;
 
 namespace ZXMAK.Platform.MDX
 {

@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Threading;
 using System.Windows.Forms;
-using Microsoft.DirectX.DirectSound;
+using SharpDX.DirectInput;
+using SharpDX.DirectSound;
 using ZXMAK.Logging;
 
 namespace ZXMAK.Platform.MDX
@@ -102,7 +103,7 @@ namespace ZXMAK.Platform.MDX
 						for (int num2 = (num + 1) % this._bufferCount; num2 != this._soundBuffer.PlayPosition / this._bufferSize; num2 = (num2 + 1) % this._bufferCount)
 						{
 							this.OnBufferFill((IntPtr)((void*)ptr), array.Length);
-							this._soundBuffer.Write(this._bufferSize * num2, array, LockFlag.None);
+							this._soundBuffer.Write(this._bufferSize * num2, array, LockFlags.None);
 							num = num2;
 						}
 					}
@@ -180,9 +181,9 @@ namespace ZXMAK.Platform.MDX
 
 		private Device _device;
 
-		private SecondaryBuffer _soundBuffer;
+		private SecondarySoundBuffer _soundBuffer;
 
-		private Notify _notify;
+		private NotificationPosition _notify;
 
 		private byte _zeroValue;
 

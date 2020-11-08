@@ -439,9 +439,12 @@ namespace ZXMAK.Platform.MDX
 			base.Show();
 		}
 
-		bool IGameLoopForm.get_Created()
+		bool IGameLoopForm.Created
 		{
-			return base.Created;
+			get
+			{
+				return base.Created;
+			}
 		}
 
 		protected const int WM_SYSCHAR = 262;
