@@ -38,15 +38,15 @@ namespace ZXMAK.Platform.XNA2.Win
 			this._platform.Spectrum.KeyboardState = this.parseKeyboard(Keyboard.GetState());
 			MouseState state = Mouse.GetState();
 			int num = 0;
-			if (state.LeftButton == 1)
+			if (state.LeftButton == (Microsoft.Xna.Framework.Input.ButtonState)(object)(1))
 			{
 				num |= 1;
 			}
-			if (state.RightButton == 1)
+			if (state.RightButton == (Microsoft.Xna.Framework.Input.ButtonState)(object)(1))
 			{
 				num |= 2;
 			}
-			if (state.MiddleButton == 1)
+			if (state.MiddleButton == (Microsoft.Xna.Framework.Input.ButtonState)(object)(1))
 			{
 				num |= 4;
 			}
@@ -59,8 +59,8 @@ namespace ZXMAK.Platform.XNA2.Win
 			}
 			if (this._targetTexture != null)
 			{
-				Texture2D texture2D = new Texture2D(this._graphicsDeviceManager.GraphicsDevice, this._targetTexture.Width, this._targetTexture.Height, 1, 0, 2);
-				texture2D.SetData<uint>(this._videoBuffer, 0, texture2D.Width * texture2D.Height, 0);
+				Texture2D texture2D = new Texture2D(this._graphicsDeviceManager.GraphicsDevice, this._targetTexture.Width, this._targetTexture.Height, Convert.ToBoolean(1), 0, 2);
+				texture2D.SetData<uint>(this._videoBuffer, 0, texture2D.Width * texture2D.Height);
 				this._targetTexture.Dispose();
 				this._targetTexture = texture2D;
 			}
@@ -70,7 +70,7 @@ namespace ZXMAK.Platform.XNA2.Win
 		protected override void Draw(GameTime gameTime)
 		{
 			this._graphicsDeviceManager.GraphicsDevice.Clear(Color.Black);
-			this._spriteBatch.Begin(1);
+			this._spriteBatch.Begin((Microsoft.Xna.Framework.Graphics.SpriteSortMode)(object)(1));
 			if (this._targetTexture != null)
 			{
 				this._spriteBatch.Draw(this._targetTexture, new Rectangle(0, 0, this._graphicsDeviceManager.PreferredBackBufferWidth, this._graphicsDeviceManager.PreferredBackBufferHeight), Color.White);
@@ -95,23 +95,23 @@ namespace ZXMAK.Platform.XNA2.Win
 		private static byte parse_7FFE(KeyboardState state)
 		{
 			byte b = 0;
-			if (state[32] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(32)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
-			if (state[161] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(161)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 2;
 			}
-			if (state[77] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(77)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 4;
 			}
-			if (state[78] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(78)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 8;
 			}
-			if (state[66] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(66)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 16;
 			}
@@ -121,23 +121,23 @@ namespace ZXMAK.Platform.XNA2.Win
 		private static byte parse_BFFE(KeyboardState state)
 		{
 			byte b = 0;
-			if (state[13] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(13)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
-			if (state[76] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(76)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 2;
 			}
-			if (state[75] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(75)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 4;
 			}
-			if (state[74] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(74)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 8;
 			}
-			if (state[72] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(72)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 16;
 			}
@@ -147,23 +147,23 @@ namespace ZXMAK.Platform.XNA2.Win
 		private static byte parse_DFFE(KeyboardState state)
 		{
 			byte b = 0;
-			if (state[80] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(80)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
-			if (state[79] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(79)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 2;
 			}
-			if (state[73] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(73)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 4;
 			}
-			if (state[85] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(85)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 8;
 			}
-			if (state[89] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(89)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 16;
 			}
@@ -173,39 +173,39 @@ namespace ZXMAK.Platform.XNA2.Win
 		private static byte parse_EFFE(KeyboardState state)
 		{
 			byte b = 0;
-			if (state[48] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(48)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
-			if (state[57] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(57)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 2;
 			}
-			if (state[56] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(56)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 4;
 			}
-			if (state[55] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(55)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 8;
 			}
-			if (state[54] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(54)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 16;
 			}
-			if (state[39] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(39)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 4;
 			}
-			if (state[38] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(38)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 8;
 			}
-			if (state[40] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(40)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 16;
 			}
-			if (state[8] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(8)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
@@ -215,27 +215,27 @@ namespace ZXMAK.Platform.XNA2.Win
 		private static byte parse_F7FE(KeyboardState state)
 		{
 			byte b = 0;
-			if (state[49] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(49)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
-			if (state[50] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(50)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 2;
 			}
-			if (state[51] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(51)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 4;
 			}
-			if (state[52] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(52)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 8;
 			}
-			if (state[53] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(53)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 16;
 			}
-			if (state[37] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(37)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 16;
 			}
@@ -245,23 +245,23 @@ namespace ZXMAK.Platform.XNA2.Win
 		private static byte parse_FBFE(KeyboardState state)
 		{
 			byte b = 0;
-			if (state[81] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(81)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
-			if (state[87] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(87)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 2;
 			}
-			if (state[69] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(69)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 4;
 			}
-			if (state[82] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(82)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 8;
 			}
-			if (state[84] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(84)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 16;
 			}
@@ -271,23 +271,23 @@ namespace ZXMAK.Platform.XNA2.Win
 		private static byte parse_FDFE(KeyboardState state)
 		{
 			byte b = 0;
-			if (state[65] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(65)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
-			if (state[83] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(83)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 2;
 			}
-			if (state[68] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(68)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 4;
 			}
-			if (state[70] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(70)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 8;
 			}
-			if (state[71] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(71)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 16;
 			}
@@ -297,43 +297,43 @@ namespace ZXMAK.Platform.XNA2.Win
 		private static byte parse_FEFE(KeyboardState state)
 		{
 			byte b = 0;
-			if (state[160] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(160)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
-			if (state[90] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(90)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 2;
 			}
-			if (state[88] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(88)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 4;
 			}
-			if (state[67] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(67)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 8;
 			}
-			if (state[86] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(86)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 16;
 			}
-			if (state[37] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(37)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
-			if (state[39] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(39)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
-			if (state[38] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(38)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
-			if (state[40] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(40)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
-			if (state[8] == 1)
+			if (state[(Microsoft.Xna.Framework.Input.Keys)(object)(8)] == (Microsoft.Xna.Framework.Input.KeyState)(object)(1))
 			{
 				b |= 1;
 			}
@@ -342,7 +342,7 @@ namespace ZXMAK.Platform.XNA2.Win
 
 		void IVideoDevice.SetResolution(VideoManager sender, int width, int height)
 		{
-			this._targetTexture = new Texture2D(this._graphicsDeviceManager.GraphicsDevice, width, height, 1, 0, 2);
+			this._targetTexture = new Texture2D(this._graphicsDeviceManager.GraphicsDevice, width, height, Convert.ToBoolean(1), 0, 2);
 			this._platform.VideoManager.SetVideoParams(new VideoParams(width, height, width, 32));
 		}
 

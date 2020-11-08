@@ -301,7 +301,7 @@ namespace ZXMAK.Platform.Windows.Forms.Controls
 			if (this.fActiveLine < 0)
 			{
 				this.fActiveLine++;
-				this.fTopAddress = this.fADDRS[0] - 1;
+				this.fTopAddress = (ushort)(this.fADDRS[0] - 1);
 				this.UpdateLines();
 			}
 		}

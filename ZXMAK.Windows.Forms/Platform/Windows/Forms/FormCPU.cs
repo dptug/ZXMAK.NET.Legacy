@@ -407,7 +407,7 @@ namespace ZXMAK.Platform.Windows.Forms
 		{
 			if (e.Button == MouseButtons.Right)
 			{
-				this.contextMenuDasm.Show(this.dasmPanel, e.Location);
+				this.contextMenuDasm.Show(this.dasmPanel.ToString(), (System.Windows.Forms.IWin32Window)(object)e.Location);
 			}
 		}
 

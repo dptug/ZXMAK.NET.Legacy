@@ -28,17 +28,18 @@
 			this.panelDasm = new global::System.Windows.Forms.Panel();
 			this.dasmPanel = new global::ZXMAK.Platform.Windows.Forms.Controls.DasmPanel();
 			this.contextMenuDasm = new global::System.Windows.Forms.ContextMenu();
-			this.menuItemDasmGotoADDR = new global::System.Windows.Forms.MenuItem();
-			this.menuItemDasmGotoPC = new global::System.Windows.Forms.MenuItem();
-			this.menuItem2 = new global::System.Windows.Forms.MenuItem();
-			this.menuItemDasmClearBreakpoints = new global::System.Windows.Forms.MenuItem();
-			this.menuItem4 = new global::System.Windows.Forms.MenuItem();
-			this.menuItemDasmRefresh = new global::System.Windows.Forms.MenuItem();
-			this.contextMenuData = new global::System.Windows.Forms.ContextMenu();
-			this.menuItemDataGotoADDR = new global::System.Windows.Forms.MenuItem();
-			this.menuItemDataSetColumnCount = new global::System.Windows.Forms.MenuItem();
-			this.menuItem5 = new global::System.Windows.Forms.MenuItem();
-			this.menuItemDataRefresh = new global::System.Windows.Forms.MenuItem();
+			this.contextMenuDasmMI = new global::System.Windows.Forms.MenuStrip();
+			this.menuItemDasmGotoADDR = new global::System.Windows.Forms.ToolStripMenuItem();
+			this.menuItemDasmGotoPC = new global::System.Windows.Forms.ToolStripMenuItem();
+			this.menuItem2 = new global::System.Windows.Forms.ToolStripMenuItem();
+			this.menuItemDasmClearBreakpoints = new global::System.Windows.Forms.ToolStripMenuItem();
+			this.menuItem4 = new global::System.Windows.Forms.ToolStripMenuItem();
+			this.menuItemDasmRefresh = new global::System.Windows.Forms.ToolStripMenuItem();
+			this.contextMenuData = new global::System.Windows.Forms.ContextMenuStrip();
+			this.menuItemDataGotoADDR = new global::System.Windows.Forms.ToolStripMenuItem();
+			this.menuItemDataSetColumnCount = new global::System.Windows.Forms.ToolStripMenuItem();
+			this.menuItem5 = new global::System.Windows.Forms.ToolStripMenuItem();
+			this.menuItemDataRefresh = new global::System.Windows.Forms.ToolStripMenuItem();
 			this.panelStatus.SuspendLayout();
 			this.panelState.SuspendLayout();
 			this.panelRegs.SuspendLayout();
@@ -196,7 +197,7 @@
 			this.dasmPanel.CheckBreakpoint += new global::ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONCHECKCPU(this.dasmPanel_CheckBreakpoint);
 			this.dasmPanel.BreakpointClick += new global::ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONCLICKCPU(this.dasmPanel_SetBreakpoint);
 			this.dasmPanel.GetDasm += new global::ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONGETDASMCPU(this.dasmPanel_GetDasm);
-			this.contextMenuDasm.MenuItems.AddRange(new global::System.Windows.Forms.MenuItem[]
+			this.contextMenuDasmMI.Items.AddRange(new global::System.Windows.Forms.ToolStripMenuItem[]
 			{
 				this.menuItemDasmGotoADDR,
 				this.menuItemDasmGotoPC,
@@ -205,39 +206,39 @@
 				this.menuItem4,
 				this.menuItemDasmRefresh
 			});
-			this.contextMenuDasm.Popup += new global::System.EventHandler(this.contextMenuDasm_Popup);
-			this.menuItemDasmGotoADDR.Index = 0;
+			this.contextMenuDasm.Popup += new global::System.Windows.Forms.PopupEventHandler(this.contextMenuDasm_Popup);
+			this.menuItemDasmGotoADDR.ImageIndex = 0;
 			this.menuItemDasmGotoADDR.Text = "Goto address...";
 			this.menuItemDasmGotoADDR.Click += new global::System.EventHandler(this.menuItemDasmGotoADDR_Click);
-			this.menuItemDasmGotoPC.Index = 1;
+			this.menuItemDasmGotoPC.ImageIndex = 1;
 			this.menuItemDasmGotoPC.Text = "Goto PC";
 			this.menuItemDasmGotoPC.Click += new global::System.EventHandler(this.menuItemDasmGotoPC_Click);
-			this.menuItem2.Index = 2;
+			this.menuItem2.ImageIndex = 2;
 			this.menuItem2.Text = "-";
-			this.menuItemDasmClearBreakpoints.Index = 3;
+			this.menuItemDasmClearBreakpoints.ImageIndex = 3;
 			this.menuItemDasmClearBreakpoints.Text = "Reset breakpoints";
 			this.menuItemDasmClearBreakpoints.Click += new global::System.EventHandler(this.menuItemDasmClearBP_Click);
-			this.menuItem4.Index = 4;
+			this.menuItem4.ImageIndex = 4;
 			this.menuItem4.Text = "-";
-			this.menuItemDasmRefresh.Index = 5;
+			this.menuItemDasmRefresh.ImageIndex = 5;
 			this.menuItemDasmRefresh.Text = "Refresh";
 			this.menuItemDasmRefresh.Click += new global::System.EventHandler(this.menuItemDasmRefresh_Click);
-			this.contextMenuData.MenuItems.AddRange(new global::System.Windows.Forms.MenuItem[]
+			this.contextMenuDataMI.Items.AddRange(new global::System.Windows.Forms.ToolStripMenuItem[]
 			{
 				this.menuItemDataGotoADDR,
 				this.menuItemDataSetColumnCount,
 				this.menuItem5,
 				this.menuItemDataRefresh
 			});
-			this.menuItemDataGotoADDR.Index = 0;
+			this.menuItemDataGotoADDR.ImageIndex = 0;
 			this.menuItemDataGotoADDR.Text = "Goto Address...";
 			this.menuItemDataGotoADDR.Click += new global::System.EventHandler(this.menuItemDataGotoADDR_Click);
-			this.menuItemDataSetColumnCount.Index = 1;
+			this.menuItemDataSetColumnCount.ImageIndex = 1;
 			this.menuItemDataSetColumnCount.Text = "Set column count...";
 			this.menuItemDataSetColumnCount.Click += new global::System.EventHandler(this.menuItemDataSetColumnCount_Click);
-			this.menuItem5.Index = 2;
+			this.menuItem5.ImageIndex = 2;
 			this.menuItem5.Text = "-";
-			this.menuItemDataRefresh.Index = 3;
+			this.menuItemDataRefresh.ImageIndex = 3;
 			this.menuItemDataRefresh.Text = "Refresh";
 			this.menuItemDataRefresh.Click += new global::System.EventHandler(this.menuItemDataRefresh_Click);
 			base.AutoScaleDimensions = new global::System.Drawing.SizeF(6f, 13f);
@@ -295,28 +296,32 @@
 
 		private global::ZXMAK.Platform.Windows.Forms.Controls.DataPanel dataPanel;
 
-		private global::System.Windows.Forms.ContextMenu contextMenuDasm;
+		private global::System.Windows.Forms.ToolTip contextMenuDasm;
 
-		private global::System.Windows.Forms.MenuItem menuItemDasmGotoADDR;
+		private global::System.Windows.Forms.MenuStrip contextMenuDasmMI;
+		
+		private global::System.Windows.Forms.ToolStripMenuItem menuItemDasmGotoADDR;
 
-		private global::System.Windows.Forms.MenuItem menuItem2;
+		private global::System.Windows.Forms.ToolStripMenuItem menuItem2;
 
-		private global::System.Windows.Forms.MenuItem menuItemDasmClearBreakpoints;
+		private global::System.Windows.Forms.ToolStripMenuItem menuItemDasmClearBreakpoints;
 
-		private global::System.Windows.Forms.MenuItem menuItem4;
+		private global::System.Windows.Forms.ToolStripMenuItem menuItem4;
 
-		private global::System.Windows.Forms.MenuItem menuItemDasmRefresh;
+		private global::System.Windows.Forms.ToolStripMenuItem menuItemDasmRefresh;
 
-		private global::System.Windows.Forms.MenuItem menuItemDasmGotoPC;
+		private global::System.Windows.Forms.ToolStripMenuItem menuItemDasmGotoPC;
 
-		private global::System.Windows.Forms.ContextMenu contextMenuData;
+		private global::System.Windows.Forms.ContextMenuStrip contextMenuData;
 
-		private global::System.Windows.Forms.MenuItem menuItemDataGotoADDR;
+		private global::System.Windows.Forms.MenuStrip contextMenuDataMI;
 
-		private global::System.Windows.Forms.MenuItem menuItemDataSetColumnCount;
+		private global::System.Windows.Forms.ToolStripMenuItem menuItemDataGotoADDR;
 
-		private global::System.Windows.Forms.MenuItem menuItem5;
+		private global::System.Windows.Forms.ToolStripMenuItem menuItemDataSetColumnCount;
 
-		private global::System.Windows.Forms.MenuItem menuItemDataRefresh;
+		private global::System.Windows.Forms.ToolStripMenuItem menuItem5;
+
+		private global::System.Windows.Forms.ToolStripMenuItem menuItemDataRefresh;
 	}
 }
