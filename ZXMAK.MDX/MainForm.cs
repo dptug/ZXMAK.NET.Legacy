@@ -92,7 +92,7 @@ namespace ZXMAK.Platform.MDX
 						base.FormBorderStyle = FormBorderStyle.None;
 						base.Location = new Point(0, 0);
 						this._mouse.StartCapture();
-						base.Menu = null;
+						base.ContextMenuStrip = null;
 						base.Size = Screen.PrimaryScreen.Bounds.Size;
 						base.Focus();
 					}
@@ -101,7 +101,7 @@ namespace ZXMAK.Platform.MDX
 						base.Location = this._location;
 						base.FormBorderStyle = this._style;
 						this._mouse.StopCapture();
-						base.Menu = this.mainMenu;
+						base.MainMenuStrip = this.mainMenu;
 						base.ClientSize = this._size;
 					}
 					this._fullscreen = value;
@@ -114,14 +114,14 @@ namespace ZXMAK.Platform.MDX
 		{
 			if (this.Fullscreen)
 			{
-				if (base.Menu != null && e.Y > 1)
+				if (base.ContextMenuStrip != null && e.Y > 1)
 				{
-					base.Menu = null;
+					base.ContextMenuStrip = null;
 					return;
 				}
 				if (e.Y <= SystemInformation.MenuHeight)
 				{
-					base.Menu = this.mainMenu;
+					base.MainMenuStrip = this.mainMenu;
 				}
 			}
 		}
@@ -423,12 +423,12 @@ namespace ZXMAK.Platform.MDX
 
 		private void menuControlStartStop_Click(object sender, EventArgs e)
 		{
-			if (((MenuItem)sender).Name == "menuControlStart")
+			if (((ToolStripMenuItem)sender).Name == "menuControlStart")
 			{
 				this._platform.Spectrum.IsRunning = true;
 				return;
 			}
-			if (((MenuItem)sender).Name == "menuControlStop")
+			if (((ToolStripMenuItem)sender).Name == "menuControlStop")
 			{
 				this._platform.Spectrum.IsRunning = false;
 			}

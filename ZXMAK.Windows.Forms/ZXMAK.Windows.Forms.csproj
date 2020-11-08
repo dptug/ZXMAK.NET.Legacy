@@ -21,7 +21,7 @@
     <EmbeddedResource Include="Platform\Windows\Forms\About.resources" />
     <EmbeddedResource Include="Platform\Windows\Forms\dbgWD1793.resources" />
     <EmbeddedResource Include="Platform\Windows\Forms\ExceptionReport.resources" />
-    <EmbeddedResource Include="Platform\Windows\Forms\FormCPU.resources" />
+    <EmbeddedResource Include="Platform\Windows\Forms\_FormCPU.resources" />
     <EmbeddedResource Include="Platform\Windows\Forms\Properties\Resources.resources" />
     <EmbeddedResource Include="Platform\Windows\Forms\TapeForm.resources" />
   </ItemGroup>
