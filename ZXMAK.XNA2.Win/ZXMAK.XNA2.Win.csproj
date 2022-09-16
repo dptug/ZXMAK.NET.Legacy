@@ -1,20 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>ZXMAK.XNA2.Win</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ZXMAK.Platform.XNA2.Win</RootNamespace>
-    <FileAlignment>4096</FileAlignment>
-    <StartupObject>ZXMAK.Platform.XNA2.Win.Program</StartupObject>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TargetFramework>net20</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>10.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
   <ItemGroup>
-    <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.0.1641" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ZXMAK.Engine\ZXMAK.Engine.csproj" />
+    <Reference Include="Microsoft.Xna.Framework.Game" />
+    <Reference Include="ZXMAK.Engine">
+      <HintPath>..\docs\ZXMAK.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework" />
   </ItemGroup>
 </Project>

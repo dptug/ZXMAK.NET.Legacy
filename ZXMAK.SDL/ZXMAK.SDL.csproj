@@ -1,26 +1,26 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>ZXMAK.SDL</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ZXMAK.Platform.SDL</RootNamespace>
-    <FileAlignment>4096</FileAlignment>
-    <StartupObject>ZXMAK.Platform.SDL.Program</StartupObject>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net20</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>10.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
   <ItemGroup>
-    <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resources" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="SDL" Version="1.2.15.16" />
-    <PackageReference Include="SharpDX" Version="4.2.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ZXMAK.Engine\ZXMAK.Engine.csproj" />
-    <ProjectReference Include="..\ZXMAK.Windows.Forms\ZXMAK.Windows.Forms.csproj" />
+    <Reference Include="SdlDotNet" />
+    <Reference Include="ZXMAK.Engine">
+      <HintPath>..\docs\ZXMAK.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.Sdl" />
+    <Reference Include="ZXMAK.Windows.Forms">
+      <HintPath>..\docs\ZXMAK.Windows.Forms.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

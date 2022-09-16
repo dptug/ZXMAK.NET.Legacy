@@ -1,29 +1,30 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>ZXMAK.MDX</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ZXMAK.Platform.MDX</RootNamespace>
-    <FileAlignment>4096</FileAlignment>
-    <StartupObject>ZXMAK.Platform.MDX.Program</StartupObject>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net20</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>10.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
   <ItemGroup>
-    <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MainForm.resources" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="SharpDX" Version="4.2.0" />
-    <PackageReference Include="SharpDX.Direct3D9" Version="4.2.0" />
-    <PackageReference Include="SharpDX.DirectInput" Version="4.2.0" />
-    <PackageReference Include="SharpDX.DirectSound" Version="4.2.0" />
-    <PackageReference Include="SharpDX.DXGI" Version="4.2.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ZXMAK.Engine\ZXMAK.Engine.csproj" />
-    <ProjectReference Include="..\ZXMAK.Windows.Forms\ZXMAK.Windows.Forms.csproj" />
+    <Reference Include="ZXMAK.Windows.Forms">
+      <HintPath>..\docs\ZXMAK.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="ZXMAK.Engine">
+      <HintPath>..\docs\ZXMAK.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3D" />
+    <Reference Include="Microsoft.DirectX.DirectInput" />
+    <Reference Include="Microsoft.DirectX.DirectSound" />
+    <Reference Include="Microsoft.DirectX.Direct3DX" />
+    <Reference Include="Microsoft.VisualC" />
+    <Reference Include="Microsoft.DirectX" />
   </ItemGroup>
 </Project>

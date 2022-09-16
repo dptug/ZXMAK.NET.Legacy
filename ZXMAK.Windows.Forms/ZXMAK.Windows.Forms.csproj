@@ -1,31 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <OutputType>Library</OutputType>
-    <RootNamespace>ZXMAK</RootNamespace>
-    <FileAlignment>4096</FileAlignment>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
-    <LangVersion>8.0</LangVersion>
+    <AssemblyName>ZXMAK.Windows.Forms</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net20</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  <PropertyGroup>
+    <LangVersion>10.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  <PropertyGroup>
+    <RootNamespace />
   </PropertyGroup>
+  <ItemGroup />
   <ItemGroup>
-    <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Platform\Windows\Forms\About.resources" />
-    <EmbeddedResource Include="Platform\Windows\Forms\dbgWD1793.resources" />
-    <EmbeddedResource Include="Platform\Windows\Forms\ExceptionReport.resources" />
-    <EmbeddedResource Include="Platform\Windows\Forms\_FormCPU.resources" />
-    <EmbeddedResource Include="Platform\Windows\Forms\Properties\Resources.resources" />
-    <EmbeddedResource Include="Platform\Windows\Forms\TapeForm.resources" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ZXMAK.Engine\ZXMAK.Engine.csproj" />
+    <Reference Include="ZXMAK.Engine">
+      <HintPath>..\docs\ZXMAK.Engine.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
