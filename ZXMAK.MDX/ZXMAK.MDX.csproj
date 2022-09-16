@@ -6,6 +6,7 @@
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>True</UseWindowsForms>
     <TargetFramework>net20</TargetFramework>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
   <PropertyGroup>
     <LangVersion>10.0</LangVersion>

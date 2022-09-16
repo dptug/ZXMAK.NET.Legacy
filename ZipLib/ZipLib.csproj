@@ -4,6 +4,7 @@
     <AssemblyName>ZipLib</AssemblyName>
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <TargetFramework>net20</TargetFramework>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
   <PropertyGroup>
     <LangVersion>10.0</LangVersion>

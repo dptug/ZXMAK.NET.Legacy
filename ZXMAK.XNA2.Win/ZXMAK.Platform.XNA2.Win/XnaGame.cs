@@ -9,11 +9,11 @@ namespace ZXMAK.Platform.XNA2.Win
 {
     public class XnaGame : Game, IVideoDevice
     {
-        private GenericPlatform _platform;
-        private GraphicsDeviceManager _graphicsDeviceManager;
+        private readonly GenericPlatform _platform;
+        private readonly GraphicsDeviceManager _graphicsDeviceManager;
         private Texture2D _targetTexture;
         private SpriteBatch _spriteBatch;
-        private uint[] _videoBuffer = new uint[76800];
+        private readonly uint[] _videoBuffer = new uint[76800];
 
         public XnaGame(GenericPlatform platform)
         {
@@ -42,7 +42,7 @@ namespace ZXMAK.Platform.XNA2.Win
 
         protected override unsafe void Update(GameTime gameTime)
         {
-            this._platform.Spectrum.KeyboardState = this.parseKeyboard(Keyboard.GetState());
+            this._platform.Spectrum.KeyboardState = this.ParseKeyboard(Keyboard.GetState());
             MouseState state = Mouse.GetState();
             int num = 0;
             if (state.LeftButton == ButtonState.Pressed)
@@ -58,7 +58,7 @@ namespace ZXMAK.Platform.XNA2.Win
                 this._platform.Spectrum.ExecuteFrame((IntPtr)(void*)videoPtr, IntPtr.Zero);
             if (this._targetTexture != null)
             {
-                Texture2D texture2D = new Texture2D(this._graphicsDeviceManager.GraphicsDevice, this._targetTexture.Width, this._targetTexture.Height, 1, TextureUsage.None, SurfaceFormat.Bgr32);
+                Texture2D texture2D = new(this._graphicsDeviceManager.GraphicsDevice, this._targetTexture.Width, this._targetTexture.Height, 1, TextureUsage.None, SurfaceFormat.Bgr32);
                 texture2D.SetData<uint>(this._videoBuffer, 0, texture2D.Width * texture2D.Height, SetDataOptions.None);
                 this._targetTexture.Dispose();
                 this._targetTexture = texture2D;
@@ -76,9 +76,9 @@ namespace ZXMAK.Platform.XNA2.Win
             base.Draw(gameTime);
         }
 
-        private long parseKeyboard(KeyboardState state) => (((((((0L << 5 | (long)XnaGame.parse_7FFE(state)) << 5 | (long)XnaGame.parse_BFFE(state)) << 5 | (long)XnaGame.parse_DFFE(state)) << 5 | (long)XnaGame.parse_EFFE(state)) << 5 | (long)XnaGame.parse_F7FE(state)) << 5 | (long)XnaGame.parse_FBFE(state)) << 5 | (long)XnaGame.parse_FDFE(state)) << 5 | (long)XnaGame.parse_FEFE(state);
+        private long ParseKeyboard(KeyboardState state) => (((((((0L << 5 | (long)XnaGame.Parse_7FFE(state)) << 5 | (long)XnaGame.Parse_BFFE(state)) << 5 | (long)XnaGame.Parse_DFFE(state)) << 5 | (long)XnaGame.Parse_EFFE(state)) << 5 | (long)XnaGame.Parse_F7FE(state)) << 5 | (long)XnaGame.Parse_FBFE(state)) << 5 | (long)XnaGame.Parse_FDFE(state)) << 5 | (long)XnaGame.Parse_FEFE(state);
 
-        private static byte parse_7FFE(KeyboardState state)
+        private static byte Parse_7FFE(KeyboardState state)
         {
             byte num = 0;
             if (state[Keys.Space] == KeyState.Down)
@@ -94,7 +94,7 @@ namespace ZXMAK.Platform.XNA2.Win
             return num;
         }
 
-        private static byte parse_BFFE(KeyboardState state)
+        private static byte Parse_BFFE(KeyboardState state)
         {
             byte bffe = 0;
             if (state[Keys.Enter] == KeyState.Down)
@@ -110,7 +110,7 @@ namespace ZXMAK.Platform.XNA2.Win
             return bffe;
         }
 
-        private static byte parse_DFFE(KeyboardState state)
+        private static byte Parse_DFFE(KeyboardState state)
         {
             byte dffe = 0;
             if (state[Keys.P] == KeyState.Down)
@@ -126,7 +126,7 @@ namespace ZXMAK.Platform.XNA2.Win
             return dffe;
         }
 
-        private static byte parse_EFFE(KeyboardState state)
+        private static byte Parse_EFFE(KeyboardState state)
         {
             byte effe = 0;
             if (state[Keys.D0] == KeyState.Down)
@@ -150,7 +150,7 @@ namespace ZXMAK.Platform.XNA2.Win
             return effe;
         }
 
-        private static byte parse_F7FE(KeyboardState state)
+        private static byte Parse_F7FE(KeyboardState state)
         {
             byte f7Fe = 0;
             if (state[Keys.D1] == KeyState.Down)
@@ -168,7 +168,7 @@ namespace ZXMAK.Platform.XNA2.Win
             return f7Fe;
         }
 
-        private static byte parse_FBFE(KeyboardState state)
+        private static byte Parse_FBFE(KeyboardState state)
         {
             byte fbfe = 0;
             if (state[Keys.Q] == KeyState.Down)
@@ -184,7 +184,7 @@ namespace ZXMAK.Platform.XNA2.Win
             return fbfe;
         }
 
-        private static byte parse_FDFE(KeyboardState state)
+        private static byte Parse_FDFE(KeyboardState state)
         {
             byte fdfe = 0;
             if (state[Keys.A] == KeyState.Down)
@@ -200,7 +200,7 @@ namespace ZXMAK.Platform.XNA2.Win
             return fdfe;
         }
 
-        private static byte parse_FEFE(KeyboardState state)
+        private static byte Parse_FEFE(KeyboardState state)
         {
             byte fefe = 0;
             if (state[Keys.LeftShift] == KeyState.Down)

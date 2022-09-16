@@ -7,9 +7,9 @@ namespace ZXMAK.Configuration;
 
 public class Config
 {
-	private string _logFileName;
+	private readonly string _logFileName;
 
-	private bool _logAppend;
+	private readonly bool _logAppend;
 
 	private bool _startupOpenDebugger;
 
@@ -67,7 +67,7 @@ public class Config
 
 	public void ParseCommandLine(string[] args)
 	{
-		ArrayList arrayList = new ArrayList();
+		ArrayList arrayList = new();
 		for (int i = 0; i < args.Length; i++)
 		{
 			string text = args[i].ToUpper();

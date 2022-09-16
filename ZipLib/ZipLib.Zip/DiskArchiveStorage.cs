@@ -7,7 +7,7 @@ public class DiskArchiveStorage : BaseArchiveStorage
 {
 	private Stream temporaryStream_;
 
-	private string fileName_;
+	private readonly string fileName_;
 
 	private string temporaryName_;
 

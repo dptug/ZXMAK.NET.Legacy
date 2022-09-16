@@ -7,7 +7,7 @@ namespace ZXMAK.Platform.Windows.Forms;
 
 public class About : Form
 {
-	private IContainer components;
+	private readonly IContainer components;
 
 	private Label labelVersionText;
 

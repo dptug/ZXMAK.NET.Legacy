@@ -13,9 +13,9 @@ public class FormCPU : Form
 {
 	private static FormCPU _instance;
 
-	private Spectrum _spectrum;
+	private readonly Spectrum _spectrum;
 
-	private IContainer components;
+	private readonly IContainer components;
 
 	private Panel panelStatus;
 
@@ -83,8 +83,8 @@ public class FormCPU : Form
 	{
 		_spectrum = spectrum;
 		InitializeComponent();
-		_spectrum.UpdateState += spectrum_OnUpdateState;
-		_spectrum.Breakpoint += spectrum_OnBreakpoint;
+		_spectrum.UpdateState += Spectrum_OnUpdateState;
+		_spectrum.Breakpoint += Spectrum_OnBreakpoint;
 	}
 
 	private void FormCPU_FormClosed(object sender, FormClosedEventArgs e)
@@ -105,11 +105,11 @@ public class FormCPU : Form
 		Select();
 	}
 
-	private void spectrum_OnUpdateState(object sender, EventArgs args)
+	private void Spectrum_OnUpdateState(object sender, EventArgs args)
 	{
 		if (base.InvokeRequired)
 		{
-			Invoke(new EventHandler(spectrum_OnUpdateState), sender, args);
+			Invoke(new EventHandler(Spectrum_OnUpdateState), sender, args);
 		}
 		else
 		{
@@ -117,11 +117,11 @@ public class FormCPU : Form
 		}
 	}
 
-	private void spectrum_OnBreakpoint(object sender, EventArgs args)
+	private void Spectrum_OnBreakpoint(object sender, EventArgs args)
 	{
 		if (base.InvokeRequired)
 		{
-			Invoke(new EventHandler(spectrum_OnBreakpoint), sender, args);
+			Invoke(new EventHandler(Spectrum_OnBreakpoint), sender, args);
 		}
 		else
 		{
@@ -197,7 +197,7 @@ public class FormCPU : Form
 		dataPanel.Refresh();
 	}
 
-	private bool dasmPanel_CheckExecuting(object Sender, ushort ADDR)
+	private bool DasmPanel_CheckExecuting(object Sender, ushort ADDR)
 	{
 		if (_spectrum.IsRunning)
 		{
@@ -210,12 +210,12 @@ public class FormCPU : Form
 		return false;
 	}
 
-	private void dasmPanel_GetDasm(object Sender, ushort ADDR, out string DASM, out int len)
+	private void DasmPanel_GetDasm(object Sender, ushort ADDR, out string DASM, out int len)
 	{
 		DASM = Z80CPU.GetMnemonic(_spectrum.ReadMemory, ADDR, Hex: true, out len);
 	}
 
-	private void dasmPanel_GetData(object Sender, ushort ADDR, int len, out byte[] data)
+	private void DasmPanel_GetData(object Sender, ushort ADDR, int len, out byte[] data)
 	{
 		data = new byte[len];
 		for (int i = 0; i < len; i++)
@@ -224,12 +224,12 @@ public class FormCPU : Form
 		}
 	}
 
-	private bool dasmPanel_CheckBreakpoint(object Sender, ushort ADDR)
+	private bool DasmPanel_CheckBreakpoint(object Sender, ushort ADDR)
 	{
 		return _spectrum.CheckBreakpoint(ADDR);
 	}
 
-	private void dasmPanel_SetBreakpoint(object Sender, ushort Addr)
+	private void DasmPanel_SetBreakpoint(object Sender, ushort Addr)
 	{
 		if (_spectrum.CheckBreakpoint(Addr))
 		{
@@ -296,7 +296,7 @@ public class FormCPU : Form
 		}
 	}
 
-	private void menuItemDasmGotoADDR_Click(object sender, EventArgs e)
+	private void MenuItemDasmGotoADDR_Click(object sender, EventArgs e)
 	{
 		int value = 0;
 		if (InputBox.InputValue("Адрес дизассемблирования", "Новое значение:", "#", "X4", ref value, 0, 65535))
@@ -305,26 +305,26 @@ public class FormCPU : Form
 		}
 	}
 
-	private void menuItemDasmGotoPC_Click(object sender, EventArgs e)
+	private void MenuItemDasmGotoPC_Click(object sender, EventArgs e)
 	{
 		dasmPanel.ActiveAddress = _spectrum.CPU.regs.PC;
 		dasmPanel.UpdateLines();
 		Refresh();
 	}
 
-	private void menuItemDasmClearBP_Click(object sender, EventArgs e)
+	private void MenuItemDasmClearBP_Click(object sender, EventArgs e)
 	{
 		_spectrum.ClearBreakpoints();
 		UpdateCPU(updatePC: false);
 	}
 
-	private void menuItemDasmRefresh_Click(object sender, EventArgs e)
+	private void MenuItemDasmRefresh_Click(object sender, EventArgs e)
 	{
 		dasmPanel.UpdateLines();
 		Refresh();
 	}
 
-	private void listF_MouseDoubleClick(object sender, MouseEventArgs e)
+	private void ListF_MouseDoubleClick(object sender, MouseEventArgs e)
 	{
 		if (listF.SelectedIndex >= 0 && !_spectrum.IsRunning)
 		{
@@ -333,7 +333,7 @@ public class FormCPU : Form
 		}
 	}
 
-	private void listREGS_MouseDoubleClick(object sender, MouseEventArgs e)
+	private void ListREGS_MouseDoubleClick(object sender, MouseEventArgs e)
 	{
 		if (listREGS.SelectedIndex >= 0 && !_spectrum.IsRunning)
 		{
@@ -400,7 +400,7 @@ public class FormCPU : Form
 		}
 	}
 
-	private void contextMenuDasm_Popup(object sender, EventArgs e)
+	private void ContextMenuDasm_Popup(object sender, EventArgs e)
 	{
 		if (_spectrum.IsRunning)
 		{
@@ -412,7 +412,7 @@ public class FormCPU : Form
 		}
 	}
 
-	private void dataPanel_DataClick(object Sender, ushort Addr)
+	private void DataPanel_DataClick(object Sender, ushort Addr)
 	{
 		int value = _spectrum.ReadMemory(Addr);
 		if (InputBox.InputValue("POKE #" + Addr.ToString("X4"), "Значение:", "#", "X2", ref value, 0, 255))
@@ -422,7 +422,7 @@ public class FormCPU : Form
 		}
 	}
 
-	private void menuItemDataGotoADDR_Click(object sender, EventArgs e)
+	private void MenuItemDataGotoADDR_Click(object sender, EventArgs e)
 	{
 		int value = dataPanel.TopAddress;
 		if (InputBox.InputValue("Адрес дампа", "Новое значение:", "#", "X4", ref value, 0, 65535))
@@ -431,13 +431,13 @@ public class FormCPU : Form
 		}
 	}
 
-	private void menuItemDataRefresh_Click(object sender, EventArgs e)
+	private void MenuItemDataRefresh_Click(object sender, EventArgs e)
 	{
 		dataPanel.UpdateLines();
 		Refresh();
 	}
 
-	private void menuItemDataSetColumnCount_Click(object sender, EventArgs e)
+	private void MenuItemDataSetColumnCount_Click(object sender, EventArgs e)
 	{
 		int value = dataPanel.ColCount;
 		if (InputBox.InputValue("Число столбцов", "Новое значение:", "", "", ref value, 1, 32))
@@ -446,7 +446,7 @@ public class FormCPU : Form
 		}
 	}
 
-	private void dasmPanel_MouseClick(object sender, MouseEventArgs e)
+	private void DasmPanel_MouseClick(object sender, MouseEventArgs e)
 	{
 		if (e.Button == MouseButtons.Right)
 		{
@@ -454,7 +454,7 @@ public class FormCPU : Form
 		}
 	}
 
-	private void dataPanel_MouseClick(object sender, MouseEventArgs e)
+	private void DataPanel_MouseClick(object sender, MouseEventArgs e)
 	{
 		if (e.Button == MouseButtons.Right)
 		{
@@ -468,7 +468,7 @@ public class FormCPU : Form
 		Hide();
 	}
 
-	private void listState_DoubleClick(object sender, EventArgs e)
+	private void ListState_DoubleClick(object sender, EventArgs e)
 	{
 		if (listState.SelectedIndex < 0 || _spectrum.IsRunning)
 		{
@@ -560,7 +560,7 @@ public class FormCPU : Form
 		this.listState.Name = "listState";
 		this.listState.Size = new System.Drawing.Size(164, 117);
 		this.listState.TabIndex = 3;
-		this.listState.DoubleClick += new System.EventHandler(listState_DoubleClick);
+		this.listState.DoubleClick += new System.EventHandler(ListState_DoubleClick);
 		this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
 		this.splitter3.Location = new System.Drawing.Point(0, 221);
 		this.splitter3.Name = "splitter3";
@@ -587,7 +587,7 @@ public class FormCPU : Form
 		this.listF.Name = "listF";
 		this.listF.Size = new System.Drawing.Size(63, 217);
 		this.listF.TabIndex = 2;
-		this.listF.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(listF_MouseDoubleClick);
+		this.listF.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(ListF_MouseDoubleClick);
 		this.splitter4.Location = new System.Drawing.Point(98, 0);
 		this.splitter4.Name = "splitter4";
 		this.splitter4.Size = new System.Drawing.Size(3, 217);
@@ -608,7 +608,7 @@ public class FormCPU : Form
 		this.listREGS.Name = "listREGS";
 		this.listREGS.Size = new System.Drawing.Size(98, 217);
 		this.listREGS.TabIndex = 1;
-		this.listREGS.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(listREGS_MouseDoubleClick);
+		this.listREGS.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(ListREGS_MouseDoubleClick);
 		this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
 		this.splitter1.Location = new System.Drawing.Point(448, 0);
 		this.splitter1.Name = "splitter1";
@@ -631,9 +631,9 @@ public class FormCPU : Form
 		this.dataPanel.TabIndex = 0;
 		this.dataPanel.Text = "dataPanel1";
 		this.dataPanel.TopAddress = 0;
-		this.dataPanel.GetData += new ZXMAK.Platform.Windows.Forms.Controls.DataPanel.ONGETDATACPU(dasmPanel_GetData);
-		this.dataPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(dataPanel_MouseClick);
-		this.dataPanel.DataClick += new ZXMAK.Platform.Windows.Forms.Controls.DataPanel.ONCLICKCPU(dataPanel_DataClick);
+		this.dataPanel.GetData += new ZXMAK.Platform.Windows.Forms.Controls.DataPanel.ONGETDATACPU(DasmPanel_GetData);
+		this.dataPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(DataPanel_MouseClick);
+		this.dataPanel.DataClick += new ZXMAK.Platform.Windows.Forms.Controls.DataPanel.ONCLICKCPU(DataPanel_DataClick);
 		this.splitter2.Dock = System.Windows.Forms.DockStyle.Bottom;
 		this.splitter2.Location = new System.Drawing.Point(0, 220);
 		this.splitter2.Name = "splitter2";
@@ -659,42 +659,42 @@ public class FormCPU : Form
 		this.dasmPanel.TabIndex = 0;
 		this.dasmPanel.Text = "dasmPanel1";
 		this.dasmPanel.TopAddress = 0;
-		this.dasmPanel.CheckExecuting += new ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONCHECKCPU(dasmPanel_CheckExecuting);
-		this.dasmPanel.GetData += new ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONGETDATACPU(dasmPanel_GetData);
-		this.dasmPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(dasmPanel_MouseClick);
-		this.dasmPanel.CheckBreakpoint += new ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONCHECKCPU(dasmPanel_CheckBreakpoint);
-		this.dasmPanel.BreakpointClick += new ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONCLICKCPU(dasmPanel_SetBreakpoint);
-		this.dasmPanel.GetDasm += new ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONGETDASMCPU(dasmPanel_GetDasm);
+		this.dasmPanel.CheckExecuting += new ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONCHECKCPU(DasmPanel_CheckExecuting);
+		this.dasmPanel.GetData += new ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONGETDATACPU(DasmPanel_GetData);
+		this.dasmPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(DasmPanel_MouseClick);
+		this.dasmPanel.CheckBreakpoint += new ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONCHECKCPU(DasmPanel_CheckBreakpoint);
+		this.dasmPanel.BreakpointClick += new ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONCLICKCPU(DasmPanel_SetBreakpoint);
+		this.dasmPanel.GetDasm += new ZXMAK.Platform.Windows.Forms.Controls.DasmPanel.ONGETDASMCPU(DasmPanel_GetDasm);
 		this.contextMenuDasm.MenuItems.AddRange(new System.Windows.Forms.MenuItem[6] { this.menuItemDasmGotoADDR, this.menuItemDasmGotoPC, this.menuItem2, this.menuItemDasmClearBreakpoints, this.menuItem4, this.menuItemDasmRefresh });
-		this.contextMenuDasm.Popup += new System.EventHandler(contextMenuDasm_Popup);
+		this.contextMenuDasm.Popup += new System.EventHandler(ContextMenuDasm_Popup);
 		this.menuItemDasmGotoADDR.Index = 0;
 		this.menuItemDasmGotoADDR.Text = "Goto address...";
-		this.menuItemDasmGotoADDR.Click += new System.EventHandler(menuItemDasmGotoADDR_Click);
+		this.menuItemDasmGotoADDR.Click += new System.EventHandler(MenuItemDasmGotoADDR_Click);
 		this.menuItemDasmGotoPC.Index = 1;
 		this.menuItemDasmGotoPC.Text = "Goto PC";
-		this.menuItemDasmGotoPC.Click += new System.EventHandler(menuItemDasmGotoPC_Click);
+		this.menuItemDasmGotoPC.Click += new System.EventHandler(MenuItemDasmGotoPC_Click);
 		this.menuItem2.Index = 2;
 		this.menuItem2.Text = "-";
 		this.menuItemDasmClearBreakpoints.Index = 3;
 		this.menuItemDasmClearBreakpoints.Text = "Reset breakpoints";
-		this.menuItemDasmClearBreakpoints.Click += new System.EventHandler(menuItemDasmClearBP_Click);
+		this.menuItemDasmClearBreakpoints.Click += new System.EventHandler(MenuItemDasmClearBP_Click);
 		this.menuItem4.Index = 4;
 		this.menuItem4.Text = "-";
 		this.menuItemDasmRefresh.Index = 5;
 		this.menuItemDasmRefresh.Text = "Refresh";
-		this.menuItemDasmRefresh.Click += new System.EventHandler(menuItemDasmRefresh_Click);
+		this.menuItemDasmRefresh.Click += new System.EventHandler(MenuItemDasmRefresh_Click);
 		this.contextMenuData.MenuItems.AddRange(new System.Windows.Forms.MenuItem[4] { this.menuItemDataGotoADDR, this.menuItemDataSetColumnCount, this.menuItem5, this.menuItemDataRefresh });
 		this.menuItemDataGotoADDR.Index = 0;
 		this.menuItemDataGotoADDR.Text = "Goto Address...";
-		this.menuItemDataGotoADDR.Click += new System.EventHandler(menuItemDataGotoADDR_Click);
+		this.menuItemDataGotoADDR.Click += new System.EventHandler(MenuItemDataGotoADDR_Click);
 		this.menuItemDataSetColumnCount.Index = 1;
 		this.menuItemDataSetColumnCount.Text = "Set column count...";
-		this.menuItemDataSetColumnCount.Click += new System.EventHandler(menuItemDataSetColumnCount_Click);
+		this.menuItemDataSetColumnCount.Click += new System.EventHandler(MenuItemDataSetColumnCount_Click);
 		this.menuItem5.Index = 2;
 		this.menuItem5.Text = "-";
 		this.menuItemDataRefresh.Index = 3;
 		this.menuItemDataRefresh.Text = "Refresh";
-		this.menuItemDataRefresh.Click += new System.EventHandler(menuItemDataRefresh_Click);
+		this.menuItemDataRefresh.Click += new System.EventHandler(MenuItemDataRefresh_Click);
 		base.AutoScaleDimensions = new System.Drawing.SizeF(6f, 13f);
 		base.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 		base.ClientSize = new System.Drawing.Size(619, 345);

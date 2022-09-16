@@ -12,7 +12,7 @@ namespace ZXMAK.Platform.SDL
         private const string SDL_NATIVE_LIBRARY = "SDL.dll";
         private const CallingConvention CALLING_CONVENTION = CallingConvention.Cdecl;
 
-        private static Tao.Sdl.Sdl.SDL_Rect ConvertRecttoSDLRect(Rectangle rect) => new Tao.Sdl.Sdl.SDL_Rect((short)rect.X, (short)rect.Y, (short)rect.Width, (short)rect.Height);
+        private static Tao.Sdl.Sdl.SDL_Rect ConvertRecttoSDLRect(Rectangle rect) => new((short)rect.X, (short)rect.Y, (short)rect.Width, (short)rect.Height);
 
         [SuppressUnmanagedCodeSecurity]
         [DllImport("SDL.dll", CallingConvention = CallingConvention.Cdecl)]
