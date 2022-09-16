@@ -15,21 +15,21 @@ public class DirectSound : IDisposable
 
 	private Notify _notify;
 
-	private byte _zeroValue;
+	private readonly byte _zeroValue;
 
-	private int _bufferSize;
+	private readonly int _bufferSize;
 
-	private int _bufferCount;
+	private readonly int _bufferCount;
 
 	private Thread _waveFillThread;
 
-	private AutoResetEvent _fillEvent = new AutoResetEvent(initialState: true);
+	private readonly AutoResetEvent _fillEvent = new(initialState: true);
 
 	private bool _isFinished;
 
-	private Queue _fillQueue;
+	private readonly Queue _fillQueue;
 
-	private Queue _playQueue;
+	private readonly Queue _playQueue;
 
 	private uint lastSample;
 
@@ -48,11 +48,13 @@ public class DirectSound : IDisposable
 		_zeroValue = (byte)((bitsPerSample == 8) ? 128 : 0);
 		_device = new Device();
 		_device.SetCooperativeLevel(mainForm, CooperativeLevel.Priority);
-		WaveFormat wfx = new WaveFormat();
-		wfx.FormatTag = WaveFormatTag.Pcm;
-		wfx.SamplesPerSecond = samplesPerSecond;
-		wfx.BitsPerSample = bitsPerSample;
-		wfx.Channels = channels;
+		WaveFormat wfx = new()
+		{
+			FormatTag = WaveFormatTag.Pcm,
+			SamplesPerSecond = samplesPerSecond,
+			BitsPerSample = bitsPerSample,
+			Channels = channels
+		};
 		wfx.BlockAlign = (short)(wfx.Channels * (wfx.BitsPerSample / 8));
 		wfx.AverageBytesPerSecond = wfx.SamplesPerSecond * wfx.BlockAlign;
 		_soundBuffer = new SecondaryBuffer(new BufferDescription(wfx)
@@ -71,10 +73,12 @@ public class DirectSound : IDisposable
 			array[j].EventNotifyHandle = _fillEvent.SafeWaitHandle.DangerousGetHandle();
 		}
 		_notify.SetNotificationPositions(array);
-		_waveFillThread = new Thread(waveFillThreadProc);
-		_waveFillThread.IsBackground = true;
-		_waveFillThread.Name = "Wave fill thread";
-		_waveFillThread.Priority = ThreadPriority.Highest;
+		_waveFillThread = new Thread(WaveFillThreadProc)
+		{
+			IsBackground = true,
+			Name = "Wave fill thread",
+			Priority = ThreadPriority.Highest
+		};
 		_waveFillThread.Start();
 	}
 
@@ -115,7 +119,7 @@ public class DirectSound : IDisposable
 		}
 	}
 
-	private unsafe void waveFillThreadProc()
+	private unsafe void WaveFillThreadProc()
 	{
 		int num = -1;
 		byte[] array = new byte[_bufferSize];
