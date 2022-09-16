@@ -12,19 +12,29 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup />
-  <ItemGroup />
   <ItemGroup>
+    <Reference Include="Microsoft.DirectX">
+      <HintPath>..\docs\Microsoft.DirectX.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3D">
+      <HintPath>..\docs\Microsoft.DirectX.Direct3D.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3DX">
+      <HintPath>..\docs\Microsoft.DirectX.Direct3DX.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectInput">
+      <HintPath>..\docs\Microsoft.DirectX.DirectInput.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectSound">
+      <HintPath>..\docs\Microsoft.DirectX.DirectSound.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="ZXMAK.Windows.Forms">
       <HintPath>..\docs\ZXMAK.Windows.Forms.dll</HintPath>
     </Reference>
     <Reference Include="ZXMAK.Engine">
       <HintPath>..\docs\ZXMAK.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.DirectX.Direct3D" />
-    <Reference Include="Microsoft.DirectX.DirectInput" />
-    <Reference Include="Microsoft.DirectX.DirectSound" />
-    <Reference Include="Microsoft.DirectX.Direct3DX" />
     <Reference Include="Microsoft.VisualC" />
-    <Reference Include="Microsoft.DirectX" />
   </ItemGroup>
 </Project>
