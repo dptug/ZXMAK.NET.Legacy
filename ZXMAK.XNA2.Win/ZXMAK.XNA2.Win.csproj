@@ -10,13 +10,18 @@
     <LangVersion>10.0</LangVersion>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup />
-  <ItemGroup />
+  <PropertyGroup>
+    <StartupObject>ZXMAK.Platform.XNA2.Win.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Xna.Framework.Game" />
+    <Reference Include="Microsoft.Xna.Framework">
+      <HintPath>..\docs\Microsoft.Xna.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Game">
+      <HintPath>..\docs\Microsoft.Xna.Framework.Game.dll</HintPath>
+    </Reference>
     <Reference Include="ZXMAK.Engine">
       <HintPath>..\docs\ZXMAK.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Xna.Framework" />
   </ItemGroup>
 </Project>

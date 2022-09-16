@@ -1,400 +1,240 @@
 using SdlDotNet.Input;
 
-namespace ZXMAK.Platform.SDL;
-
-public class Keyboard
+namespace ZXMAK.Platform.SDL
 {
-	private long _state;
+    public class Keyboard
+    {
+        private long _state;
+        private KeyboardState _keyboardState;
 
-	private KeyboardState _keyboardState;
+        public Keyboard() => this._keyboardState = new KeyboardState();
 
-	public long State => _state;
+        public void Scan()
+        {
+            this._state = 0L;
+            this._keyboardState.Update();
+            this._state = this.parseKeyboardState(this._keyboardState);
+        }
 
-	public Keyboard()
-	{
-		//IL_0007: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0011: Expected O, but got Unknown
-		_keyboardState = new KeyboardState();
-	}
+        public long State => this._state;
 
-	public void Scan()
-	{
-		_state = 0L;
-		_keyboardState.Update();
-		_state = parseKeyboardState(_keyboardState);
-	}
+        private long parseKeyboardState(KeyboardState state)
+        {
+            long num = 0;
+            return state[Key.LeftAlt] || state[Key.RightAlt] ? 0L : (((((((num << 5 | (long)Keyboard.parse_7FFE(state)) << 5 | (long)Keyboard.parse_BFFE(state)) << 5 | (long)Keyboard.parse_DFFE(state)) << 5 | (long)Keyboard.parse_EFFE(state)) << 5 | (long)Keyboard.parse_F7FE(state)) << 5 | (long)Keyboard.parse_FBFE(state)) << 5 | (long)Keyboard.parse_FDFE(state)) << 5 | (long)Keyboard.parse_FEFE(state);
+        }
 
-	private long parseKeyboardState(KeyboardState state)
-	{
-		long num = 0L;
-		if (state.get_Item((Key)308) || state.get_Item((Key)307))
-		{
-			return 0L;
-		}
-		num = (num << 5) | parse_7FFE(state);
-		num = (num << 5) | parse_BFFE(state);
-		num = (num << 5) | parse_DFFE(state);
-		num = (num << 5) | parse_EFFE(state);
-		num = (num << 5) | parse_F7FE(state);
-		num = (num << 5) | parse_FBFE(state);
-		num = (num << 5) | parse_FDFE(state);
-		return (num << 5) | parse_FEFE(state);
-	}
+        private static byte parse_7FFE(KeyboardState state)
+        {
+            byte num = 0;
+            if (state[Key.Space])
+                num |= (byte)1;
+            if (state[Key.RightShift])
+                num |= (byte)2;
+            if (state[Key.M])
+                num |= (byte)4;
+            if (state[Key.N])
+                num |= (byte)8;
+            if (state[Key.B])
+                num |= (byte)16;
+            if (state[Key.CapsLock] || state[Key.KeypadPlus] || state[Key.KeypadMinus] || state[Key.KeypadMultiply] || state[Key.KeypadDivide])
+                num |= (byte)2;
+            if (state[Key.Period] || state[Key.Comma] || state[Key.Semicolon] || state[Key.Quote] || state[Key.Slash] || state[Key.Minus] || state[Key.Equals] || state[Key.LeftBracket] || state[Key.RightBracket])
+                num |= (byte)2;
+            if (state[Key.KeypadMultiply])
+                num |= (byte)16;
+            if (!state[Key.RightShift])
+            {
+                if (state[Key.Period])
+                    num |= (byte)4;
+                if (state[Key.Comma])
+                    num |= (byte)8;
+            }
+            return num;
+        }
 
-	private static byte parse_7FFE(KeyboardState state)
-	{
-		byte b = 0;
-		if (state.get_Item((Key)32))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)303))
-		{
-			b = (byte)(b | 2u);
-		}
-		if (state.get_Item((Key)109))
-		{
-			b = (byte)(b | 4u);
-		}
-		if (state.get_Item((Key)110))
-		{
-			b = (byte)(b | 8u);
-		}
-		if (state.get_Item((Key)98))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		if (state.get_Item((Key)301) || state.get_Item((Key)270) || state.get_Item((Key)269) || state.get_Item((Key)268) || state.get_Item((Key)267))
-		{
-			b = (byte)(b | 2u);
-		}
-		if (state.get_Item((Key)46) || state.get_Item((Key)44) || state.get_Item((Key)59) || state.get_Item((Key)39) || state.get_Item((Key)47) || state.get_Item((Key)45) || state.get_Item((Key)61) || state.get_Item((Key)91) || state.get_Item((Key)93))
-		{
-			b = (byte)(b | 2u);
-		}
-		if (state.get_Item((Key)268))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		if (!state.get_Item((Key)303))
-		{
-			if (state.get_Item((Key)46))
-			{
-				b = (byte)(b | 4u);
-			}
-			if (state.get_Item((Key)44))
-			{
-				b = (byte)(b | 8u);
-			}
-		}
-		return b;
-	}
+        private static byte parse_BFFE(KeyboardState state)
+        {
+            byte bffe = 0;
+            if (state[Key.Return])
+                bffe |= (byte)1;
+            if (state[Key.L])
+                bffe |= (byte)2;
+            if (state[Key.K])
+                bffe |= (byte)4;
+            if (state[Key.J])
+                bffe |= (byte)8;
+            if (state[Key.H])
+                bffe |= (byte)16;
+            if (state[Key.KeypadEnter])
+                bffe |= (byte)1;
+            if (state[Key.KeypadMinus])
+                bffe |= (byte)8;
+            if (state[Key.KeypadPlus])
+                bffe |= (byte)4;
+            if (state[Key.RightShift])
+            {
+                if (state[Key.Equals])
+                    bffe |= (byte)4;
+            }
+            else
+            {
+                if (state[Key.Minus])
+                    bffe |= (byte)8;
+                if (state[Key.Equals])
+                    bffe |= (byte)2;
+            }
+            return bffe;
+        }
 
-	private static byte parse_BFFE(KeyboardState state)
-	{
-		byte b = 0;
-		if (state.get_Item((Key)13))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)108))
-		{
-			b = (byte)(b | 2u);
-		}
-		if (state.get_Item((Key)107))
-		{
-			b = (byte)(b | 4u);
-		}
-		if (state.get_Item((Key)106))
-		{
-			b = (byte)(b | 8u);
-		}
-		if (state.get_Item((Key)104))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		if (state.get_Item((Key)271))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)269))
-		{
-			b = (byte)(b | 8u);
-		}
-		if (state.get_Item((Key)270))
-		{
-			b = (byte)(b | 4u);
-		}
-		if (state.get_Item((Key)303))
-		{
-			if (state.get_Item((Key)61))
-			{
-				b = (byte)(b | 4u);
-			}
-		}
-		else
-		{
-			if (state.get_Item((Key)45))
-			{
-				b = (byte)(b | 8u);
-			}
-			if (state.get_Item((Key)61))
-			{
-				b = (byte)(b | 2u);
-			}
-		}
-		return b;
-	}
+        private static byte parse_DFFE(KeyboardState state)
+        {
+            byte dffe = 0;
+            if (state[Key.P])
+                dffe |= (byte)1;
+            if (state[Key.O])
+                dffe |= (byte)2;
+            if (state[Key.I])
+                dffe |= (byte)4;
+            if (state[Key.U])
+                dffe |= (byte)8;
+            if (state[Key.Y])
+                dffe |= (byte)16;
+            if (state[Key.RightShift])
+            {
+                if (state[Key.Quote])
+                    dffe |= (byte)1;
+            }
+            else if (state[Key.Semicolon])
+                dffe |= (byte)2;
+            return dffe;
+        }
 
-	private static byte parse_DFFE(KeyboardState state)
-	{
-		byte b = 0;
-		if (state.get_Item((Key)112))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)111))
-		{
-			b = (byte)(b | 2u);
-		}
-		if (state.get_Item((Key)105))
-		{
-			b = (byte)(b | 4u);
-		}
-		if (state.get_Item((Key)117))
-		{
-			b = (byte)(b | 8u);
-		}
-		if (state.get_Item((Key)121))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		if (state.get_Item((Key)303))
-		{
-			if (state.get_Item((Key)39))
-			{
-				b = (byte)(b | 1u);
-			}
-		}
-		else if (state.get_Item((Key)59))
-		{
-			b = (byte)(b | 2u);
-		}
-		return b;
-	}
+        private static byte parse_EFFE(KeyboardState state)
+        {
+            byte effe = 0;
+            if (state[Key.Zero])
+                effe |= (byte)1;
+            if (state[Key.Nine])
+                effe |= (byte)2;
+            if (state[Key.Eight])
+                effe |= (byte)4;
+            if (state[Key.Seven])
+                effe |= (byte)8;
+            if (state[Key.Six])
+                effe |= (byte)16;
+            if (state[Key.RightArrow])
+                effe |= (byte)4;
+            if (state[Key.UpArrow])
+                effe |= (byte)8;
+            if (state[Key.DownArrow])
+                effe |= (byte)16;
+            if (state[Key.Backspace])
+                effe |= (byte)1;
+            if (state[Key.RightShift])
+            {
+                if (state[Key.Minus])
+                    effe |= (byte)1;
+            }
+            else if (state[Key.Quote])
+                effe |= (byte)8;
+            return effe;
+        }
 
-	private static byte parse_EFFE(KeyboardState state)
-	{
-		byte b = 0;
-		if (state.get_Item((Key)48))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)57))
-		{
-			b = (byte)(b | 2u);
-		}
-		if (state.get_Item((Key)56))
-		{
-			b = (byte)(b | 4u);
-		}
-		if (state.get_Item((Key)55))
-		{
-			b = (byte)(b | 8u);
-		}
-		if (state.get_Item((Key)54))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		if (state.get_Item((Key)275))
-		{
-			b = (byte)(b | 4u);
-		}
-		if (state.get_Item((Key)273))
-		{
-			b = (byte)(b | 8u);
-		}
-		if (state.get_Item((Key)274))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		if (state.get_Item((Key)8))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)303))
-		{
-			if (state.get_Item((Key)45))
-			{
-				b = (byte)(b | 1u);
-			}
-		}
-		else if (state.get_Item((Key)39))
-		{
-			b = (byte)(b | 8u);
-		}
-		return b;
-	}
+        private static byte parse_F7FE(KeyboardState state)
+        {
+            byte f7Fe = 0;
+            if (state[Key.One])
+                f7Fe |= (byte)1;
+            if (state[Key.Two])
+                f7Fe |= (byte)2;
+            if (state[Key.Three])
+                f7Fe |= (byte)4;
+            if (state[Key.Four])
+                f7Fe |= (byte)8;
+            if (state[Key.Five])
+                f7Fe |= (byte)16;
+            if (state[Key.LeftArrow])
+                f7Fe |= (byte)16;
+            return f7Fe;
+        }
 
-	private static byte parse_F7FE(KeyboardState state)
-	{
-		byte b = 0;
-		if (state.get_Item((Key)49))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)50))
-		{
-			b = (byte)(b | 2u);
-		}
-		if (state.get_Item((Key)51))
-		{
-			b = (byte)(b | 4u);
-		}
-		if (state.get_Item((Key)52))
-		{
-			b = (byte)(b | 8u);
-		}
-		if (state.get_Item((Key)53))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		if (state.get_Item((Key)276))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		return b;
-	}
+        private static byte parse_FBFE(KeyboardState state)
+        {
+            byte fbfe = 0;
+            if (state[Key.Q])
+                fbfe |= (byte)1;
+            if (state[Key.W])
+                fbfe |= (byte)2;
+            if (state[Key.E])
+                fbfe |= (byte)4;
+            if (state[Key.R])
+                fbfe |= (byte)8;
+            if (state[Key.T])
+                fbfe |= (byte)16;
+            if (state[Key.RightShift])
+            {
+                if (state[Key.Period])
+                    fbfe |= (byte)16;
+                if (state[Key.Comma])
+                    fbfe |= (byte)8;
+            }
+            return fbfe;
+        }
 
-	private static byte parse_FBFE(KeyboardState state)
-	{
-		byte b = 0;
-		if (state.get_Item((Key)113))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)119))
-		{
-			b = (byte)(b | 2u);
-		}
-		if (state.get_Item((Key)101))
-		{
-			b = (byte)(b | 4u);
-		}
-		if (state.get_Item((Key)114))
-		{
-			b = (byte)(b | 8u);
-		}
-		if (state.get_Item((Key)116))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		if (state.get_Item((Key)303))
-		{
-			if (state.get_Item((Key)46))
-			{
-				b = (byte)(b | 0x10u);
-			}
-			if (state.get_Item((Key)44))
-			{
-				b = (byte)(b | 8u);
-			}
-		}
-		return b;
-	}
+        private static byte parse_FDFE(KeyboardState state)
+        {
+            byte fdfe = 0;
+            if (state[Key.A])
+                fdfe |= (byte)1;
+            if (state[Key.S])
+                fdfe |= (byte)2;
+            if (state[Key.D])
+                fdfe |= (byte)4;
+            if (state[Key.F])
+                fdfe |= (byte)8;
+            if (state[Key.G])
+                fdfe |= (byte)16;
+            return fdfe;
+        }
 
-	private static byte parse_FDFE(KeyboardState state)
-	{
-		byte b = 0;
-		if (state.get_Item((Key)97))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)115))
-		{
-			b = (byte)(b | 2u);
-		}
-		if (state.get_Item((Key)100))
-		{
-			b = (byte)(b | 4u);
-		}
-		if (state.get_Item((Key)102))
-		{
-			b = (byte)(b | 8u);
-		}
-		if (state.get_Item((Key)103))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		return b;
-	}
-
-	private static byte parse_FEFE(KeyboardState state)
-	{
-		byte b = 0;
-		if (state.get_Item((Key)304))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)122))
-		{
-			b = (byte)(b | 2u);
-		}
-		if (state.get_Item((Key)120))
-		{
-			b = (byte)(b | 4u);
-		}
-		if (state.get_Item((Key)99))
-		{
-			b = (byte)(b | 8u);
-		}
-		if (state.get_Item((Key)118))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		if (state.get_Item((Key)276))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)275))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)273))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)274))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)8))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)301))
-		{
-			b = (byte)(b | 1u);
-		}
-		if (state.get_Item((Key)267))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		if (state.get_Item((Key)303))
-		{
-			if (state.get_Item((Key)59))
-			{
-				b = (byte)(b | 2u);
-			}
-			if (state.get_Item((Key)47))
-			{
-				b = (byte)(b | 8u);
-			}
-		}
-		else if (state.get_Item((Key)47))
-		{
-			b = (byte)(b | 0x10u);
-		}
-		return b;
-	}
+        private static byte parse_FEFE(KeyboardState state)
+        {
+            byte fefe = 0;
+            if (state[Key.LeftShift])
+                fefe |= (byte)1;
+            if (state[Key.Z])
+                fefe |= (byte)2;
+            if (state[Key.X])
+                fefe |= (byte)4;
+            if (state[Key.C])
+                fefe |= (byte)8;
+            if (state[Key.V])
+                fefe |= (byte)16;
+            if (state[Key.LeftArrow])
+                fefe |= (byte)1;
+            if (state[Key.RightArrow])
+                fefe |= (byte)1;
+            if (state[Key.UpArrow])
+                fefe |= (byte)1;
+            if (state[Key.DownArrow])
+                fefe |= (byte)1;
+            if (state[Key.Backspace])
+                fefe |= (byte)1;
+            if (state[Key.CapsLock])
+                fefe |= (byte)1;
+            if (state[Key.KeypadDivide])
+                fefe |= (byte)16;
+            if (state[Key.RightShift])
+            {
+                if (state[Key.Semicolon])
+                    fefe |= (byte)2;
+                if (state[Key.Slash])
+                    fefe |= (byte)8;
+            }
+            else if (state[Key.Slash])
+                fefe |= (byte)16;
+            return fefe;
+        }
+    }
 }

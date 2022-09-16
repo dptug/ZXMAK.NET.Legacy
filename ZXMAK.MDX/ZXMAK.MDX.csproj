@@ -11,7 +11,9 @@
     <LangVersion>10.0</LangVersion>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup />
+  <PropertyGroup>
+    <StartupObject>ZXMAK.Platform.MDX.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.DirectX">
       <HintPath>..\docs\Microsoft.DirectX.dll</HintPath>

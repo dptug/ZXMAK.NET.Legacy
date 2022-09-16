@@ -1,5 +1,7 @@
 using System;
 using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 using Microsoft.DirectX;
 using Microsoft.DirectX.Direct3D;
 using ZXMAK.Engine;
@@ -126,6 +128,25 @@ public class RenderVideo : Render3D, IVideoDevice
 
 	void IVideoDevice.SetResolution(VideoManager sender, int width, int height)
 	{
-		ResolutionChanged(sender, width, height);
-	}
+		try
+		{
+			ResolutionChanged(sender, width, height);
+		}
+		catch (Exception ex)
+		{
+			try
+			{
+				using (StreamWriter streamWriter = new StreamWriter("client-crashlog.txt", append: true))
+				{
+					streamWriter.WriteLine(DateTime.Now);
+					streamWriter.WriteLine(ex);
+					streamWriter.WriteLine("");
+				}
+				MessageBox.Show(ex.ToString(), "ZXMAK: Error");
+			}
+			catch
+			{
+			}
+		}
+    }
 }

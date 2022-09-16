@@ -33,7 +33,7 @@ public class Audio
 		_bufferSize = bufferSize;
 		_callback = new AudioCallback(Unsigned16LittleStream);
 		_stream = new AudioStream(samplesPerSecond, (AudioFormat)(-32752), (SoundChannel)2, (short)(bufferSize / 4), _callback, (object)"zx");
-		_stream.set_Paused(false);
+		_stream.Paused = false;
 	}
 
 	private unsafe void Unsigned16LittleStream(IntPtr userData, IntPtr buffer, int length)

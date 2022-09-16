@@ -11,14 +11,19 @@
     <LangVersion>10.0</LangVersion>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup />
-  <ItemGroup />
+  <PropertyGroup>
+    <StartupObject>ZXMAK.Platform.SDL.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SdlDotNet" />
+    <Reference Include="SdlDotNet">
+      <HintPath>..\docs\SdlDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.Sdl">
+      <HintPath>..\docs\Tao.Sdl.dll</HintPath>
+    </Reference>
     <Reference Include="ZXMAK.Engine">
       <HintPath>..\docs\ZXMAK.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Tao.Sdl" />
     <Reference Include="ZXMAK.Windows.Forms">
       <HintPath>..\docs\ZXMAK.Windows.Forms.dll</HintPath>
     </Reference>
