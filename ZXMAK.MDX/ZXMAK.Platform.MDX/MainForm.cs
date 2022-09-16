@@ -565,13 +565,10 @@ public class MainForm : Form, IGameLoopForm
 		}
 	}
 
-	virtual void IGameLoopForm.Show()
+	void IGameLoopForm.Show()
 	{
 		Show();
 	}
 
-	virtual bool IGameLoopForm.get_Created()
-	{
-		return base.Created;
-	}
+    bool IGameLoopForm.Created => this.Created;
 }
